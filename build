@@ -6,10 +6,10 @@ cd /opt/asus/tools
 sudo tar -jxvf buildroot-gcc463_32bits.tar.bz2
 fi
 if [ ! -h "/opt/brcm" ];then
-sudo ln -s ~/ac85p-merlin/tools/brcm /opt/brcm
+sudo ln -s ~/opt/asus/tools/brcm /opt/brcm
 fi
 if [ ! -h "/opt/buildroot-gcc463" ];then
-sudo ln -ss ~/ac85p-merlin/tools/buildroot-gcc463 /opt/buildroot-gcc463
+sudo ln -ss ~/opt/asus/tools/buildroot-gcc463 /opt/buildroot-gcc463
 fi
 cd /opt/asus/release/src-ra-5010
 export PATH=/opt/brcm/hndtools-mipsel-linux/bin:$PATH
