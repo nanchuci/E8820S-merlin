@@ -6,7 +6,7 @@ sudo ln -s ~/opt/asus/tools/brcm /opt/brcm
 fi
 if [ ! -h "/opt/buildroot-gcc463" ];then
 cd /opt/asus/tools
-sudo ln -ss ~/opt/asus/tools/buildroot-gcc463 /opt/buildroot-gcc463
+sudo ln -s ~/opt/asus/tools/buildroot-gcc463 /opt/buildroot-gcc463
 fi
 cd /opt/asus/release/src-ra-5010
 export PATH=/opt/brcm/hndtools-mipsel-linux/bin:$PATH
