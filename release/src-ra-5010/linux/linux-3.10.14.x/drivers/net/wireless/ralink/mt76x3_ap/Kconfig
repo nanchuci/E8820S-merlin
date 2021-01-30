@@ -5,10 +5,16 @@ config MT7603E_RLT_AP_SUPPORT
 	select WEXT_SPY
 	select WEXT_PRIV
 
+config  MT7603E_AP_LED
+	bool "LED support"
+	depends on MT7603E_AP
+	default y
+
 #config RLT_AP_SUPPORT
 #	bool "7603"
 #	depends on MT7603E_RLT_AP_SUPPORT
 #	default y
+
 config MT7603E_WDS_SUPPORT
 	bool "WDS"
 	depends on MT7603E_RLT_AP_SUPPORT
