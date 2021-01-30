@@ -24,8 +24,8 @@ fi
 if [ ! -h "/opt/buildroot-gcc463" ];then
 sudo ln -s /opt/asus/tools/buildroot-gcc463 /opt/buildroot-gcc463
 fi
-sudo ln -s /usr/bin/aclocal /usr/bin/aclocal-1.14
-sudo ln -s /usr/bin/automake /usr/bin/automake-1.14
+sudo ln -s /opt/asus/bin/aclocal /opt/asus/bin/aclocal-1.14
+sudo ln -s /opt/asus/bin/automake /opt/asus/bin/automake-1.14
 cd /opt/asus/release/src-ra-5010
 export PATH=/opt/brcm/hndtools-mipsel-linux/bin:$PATH
 export PATH=/opt/brcm/hndtools-mipsel-uclibc/bin:$PATH
