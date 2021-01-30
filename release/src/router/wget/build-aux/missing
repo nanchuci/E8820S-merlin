@@ -78,7 +78,6 @@ Send bug reports to <bug-automake@gnu.org>."
 esac
 
 # Run the given program, remember its exit status.
-"$@"; st=$?
 
 # If it succeeded, we are done.
 test $st -eq 0 && exit 0
@@ -101,9 +100,9 @@ else
   exit $st
 fi
 
-perl_URL=http://www.perl.org/
-flex_URL=http://flex.sourceforge.net/
-gnu_software_URL=http://www.gnu.org/software
+perl_URL=https://www.perl.org/
+flex_URL=https://flex.sourceforge.net/
+gnu_software_URL=https://www.gnu.org/software
 
 program_details ()
 {
