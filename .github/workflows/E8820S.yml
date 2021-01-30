@@ -53,7 +53,6 @@ jobs:
     - name: Build Firmware
       run: |
         cd /opt/asus
-        sudo autoreconf -ivf
         sudo chmod +x build
         sudo ./build
     - name : Upload packages
