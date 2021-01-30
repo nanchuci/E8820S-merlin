@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd /opt/asus
+sudo autoreconf -ivf
 if [ ! -d "brcm" ];then
 echo "=================EXTRACT-brcm============================="
 cd /opt/asus/tools
