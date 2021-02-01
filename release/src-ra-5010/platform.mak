@@ -85,7 +85,7 @@ DRAM_POOL = 		\
 	"512M"		
 
 FIRST_IF_POOL =		\
-	"NONE"		\
+	"NONE"	\
 	"RT2860"	\
 	"RT3092"	\
 	"RT5392"	\
@@ -210,6 +210,8 @@ define platformKernelConfig
 			echo "CONFIG_PCIE_PORT0=y" >>$(1); \
 			sed -i "/CONFIG_PCIE_PORT1/d" $(1); \
 			echo "CONFIG_PCIE_PORT1=y" >>$(1); \
+			sed -i "/CONFIG_RALINK_SPDIF/d" $(1); \
+			echo "CONFIG_RALINK_SPDIF=m" >>$(1); \
 			sed -i "/CONFIG_RCU_CPU_STALL_DETECTOR/d" $(1); \
 			echo "CONFIG_RCU_CPU_STALL_DETECTOR=y" >>$(1); \
 			sed -i "/CONFIG_CRYPTO_PCRYPT/d" $(1); \
@@ -457,7 +459,7 @@ define platformKernelConfig
 		sed -i "/CONFIG_DOT11_VHT_AC/d" $(1); \
 		echo "CONFIG_DOT11_VHT_AC=y" >>$(1); \
 		sed -i "/CONFIG_DOT11W_PMF_SUPPORT/d" $(1); \
-		echo "CONFIG_DOT11W_PMF_SUPPORT=y" >>$(1); \
+		echo "# CONFIG_DOT11W_PMF_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_TXBF_SUPPORT/d" $(1); \
 		echo "# CONFIG_TXBF_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_LLTD_SUPPORT/d" $(1); \
@@ -505,7 +507,7 @@ define platformKernelConfig
 		echo "# CONFIG_HOTSPOT is not set" >>$(1); \
 		sed -i "/CONFIG_CO_CLOCK_SUPPORT/d" $(1); \
 		echo "# CONFIG_CO_CLOCK_SUPPORT is not set" >>$(1); \
-		if [ "$(RTN56UB1)" = "y" ] || [ "$(RTN56UB2)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
+		if [ "$(RTN56UB1)" = "y" ] || [ "$(RTN56UB2)" = "y" ] ; then \
 			if [ "$(MT7603_EXTERNAL_PA_EXTERNAL_LNA)" = "y" ] ; then \
 				sed -i "/CONFIG_FIRST_CARD_EXTERNAL_PA/d" $(1); \
 				echo "CONFIG_FIRST_CARD_EXTERNAL_PA=y" >>$(1); \
@@ -523,7 +525,7 @@ define platformKernelConfig
 				sed -i "/CONFIG_FIRST_CARD_EXTERNAL_LNA/d" $(1); \
 				echo "# CONFIG_FIRST_CARD_EXTERNAL_LNA is not set " >>$(1); \
 		fi; \
-		if [ "$(RTAC1200HP)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
+		if [ "$(RTAC1200HP)" = "y" ] ; then \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_PA/d" $(1); \
 			echo "CONFIG_SECOND_CARD_EXTERNAL_PA=y" >>$(1); \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_LNA/d" $(1); \
@@ -538,7 +540,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RLT_MAC/d" $(1); \
 			echo "#CONFIG_RLT_MAC is not set" >>$(1); \
 		fi; \
-		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
+		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] ; then \
 			sed -i "/CONFIG_RA_HW_NAT_IPV6/d" $(1); \
 			echo "CONFIG_RA_HW_NAT_IPV6=y" >>$(1); \
 			sed -i "/CONFIG_RAETH_8023AZ_EEE/d" $(1); \
@@ -571,10 +573,6 @@ define platformKernelConfig
 		echo "CONFIG_WDS_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_MBSS_SUPPORT/d" $(1); \
 		echo "CONFIG_MBSS_SUPPORT=y" >>$(1); \
-		sed -i "/CONFIG_NEW_MBSSID_MODE/d" $(1); \
-		echo "CONFIG_NEW_MBSSID_MODE=y" >>$(1); \
-		sed -i "/CONFIG_ENHANCE_NEW_MBSSID_MODE/d" $(1); \
-		echo "CONFIG_ENHANCE_NEW_MBSSID_MODE=y" >>$(1); \
 		sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 		echo "# CONFIG_APCLI_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_NINTENDO_AP/d" $(1); \
@@ -631,7 +629,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 			echo "CONFIG_APCLI_SUPPORT=y" >>$(1); \
 			sed -i "/CONFIG_MAC_REPEATER_SUPPORT/d" $(1); \
-			echo "CONFIG_MAC_REPEATER_SUPPORT=y" >>$(1); \
+			echo "# CONFIG_MAC_REPEATER_SUPPORT is not set" >>$(1); \
 			sed -i "/CONFIG_APCLI_CERT_SUPPORT/d" $(1); \
 			echo "# CONFIG_APCLI_CERT_SUPPORT is not set" >>$(1); \
 		fi; \
