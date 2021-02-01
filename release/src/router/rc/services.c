@@ -1630,7 +1630,7 @@ void start_dnsmasq(void)
 	if (nvram_match("dhcp_static_x","1")) {
 		write_static_leases(fp);
 	}
-#if defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
+#if defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 	if (!repeater_mode()) {
 		fprintf(fp, "dhcp-script=/sbin/dhcpc_lease\n");
 		fprintf(fp, "script-arp\n");
@@ -9516,7 +9516,7 @@ again:
 					_dprintf(" Write FW to the 2nd partition.\n");
 					if (nvram_contains_word("rc_support", "nandflash"))	/* RT-AC56S,U/RT-AC68U/RT-N16UHP */
 						eval("mtd-write2", upgrade_file, "linux2");
-#if !defined(RMAC2100)
+#if !defined(RMAC2100) || defined(RTE8820S)
 					else
 						eval("mtd-write", "-i", upgrade_file, "-d", "linux2");
 #endif

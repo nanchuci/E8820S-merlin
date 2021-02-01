@@ -199,7 +199,7 @@ ifeq ($(or $(RTAC68A),$(RT4GAC68U)),y)
 CFLAGS += -DRTAC68U
 endif
 
-ifeq ($(or $(RTAC85U),$(RTAC85P),$(RTACRH26),$(RMAC2100)),y)
+ifeq ($(or $(RTAC85U),$(RTAC85P),$(RTACRH26),$(RMAC2100),$(RTE8820S)),y)
 TARGET_MODEL = $(subst -,,$(subst +,P,$(BUILD_NAME)))
 CFLAGS += -D$(TARGET_MODEL)
 endif
@@ -236,7 +236,7 @@ endif
 
 OBJS := rc.o init.o interface.o lan.o wireless.o wan.o pppd.o auth.o services.o
 OBJS += firewall.o ppp.o services.o common.o
-OBJS += watchdog.o ntp.o $(if $(RTCONFIG_MULTIWAN_CFG),qos_multiwan.o,qos.o) udhcpc.o ate.o
+OBJS += watchdog.o ntp.o $(if $(RTCONFIG_MULTIWAN_CFG),qos_multiwan.o,qos.o) udhcpc.o
 OBJS += format.o
 
 ifeq ($(RTCONFIG_NETOOL),y)
@@ -969,7 +969,7 @@ endif
 ifeq ($(RTCONFIG_TR069),y)
 	@cd $(INSTALLDIR)/sbin && ln -sf rc dhcpc_lease
 endif
-ifeq ($(MERLINR_NAME), $(filter $(MERLINR_NAME), SBRAC3200P RTAC85P RMAC2100))
+ifeq ($(MERLINR_NAME), $(filter $(MERLINR_NAME), SBRAC3200P RTAC85P RMAC2100 RTE8820S))
 	@cd $(INSTALLDIR)/sbin && ln -sf rc dhcpc_lease
 endif
 

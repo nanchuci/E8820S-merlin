@@ -3835,6 +3835,122 @@ int init_nvram(void)
 		break;
 #endif /*  RTAC85U  */
 
+#if defined(RTE8820S)
+	case MODEL_RTE8820S:
+		nvram_set("boardflags", "0x100"); // although it is not used in ralink driver, set for vlan
+		nvram_set("vlan1hwname", "et0");  // vlan. used to get "%smacaddr" for compare and find parent interface.
+		nvram_set("vlan2hwname", "et0");  // vlan. used to get "%smacaddr" for compare and find parent interface.
+		nvram_set("lan_ifname", "br0");
+		wl_ifaces[WL_2G_BAND] = "ra0";
+		wl_ifaces[WL_5G_BAND] = "rai0";
+		set_basic_ifname_vars("eth3", "vlan1", wl_ifaces, "usb", "vlan1", NULL, "vlan3", NULL, 0);
+
+		nvram_set_int("btn_rst_gpio",  18|GPIO_ACTIVE_LOW);
+		nvram_set_int("btn_wps_gpio",  8|GPIO_ACTIVE_LOW);
+		nvram_set_int("btn_wltog_gpio",10|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_sys_gpio", 16|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_pwr_gpio",  3|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_wps_gpio",  7|GPIO_ACTIVE_LOW);
+//		nvram_set_int("led_all_gpio", 10|GPIO_ACTIVE_LOW);
+
+		eval("rtkswitch", "11");
+
+		/* enable bled */
+		config_netdev_bled("led_2g_gpio", "ra0");
+		config_netdev_bled("led_5g_gpio", "rai0");
+		config_usbbus_bled("led_usb_gpio", "1 2");
+
+		nvram_set("ehci_ports", "1-1");
+		nvram_set("ohci_ports", "2-1");
+		nvram_set("ct_max", "300000"); // force
+
+		if (nvram_get("wl_mssid") && nvram_match("wl_mssid", "1"))
+			add_rc_support("mssid");
+		add_rc_support("2.4G 5G update usbX1");
+		add_rc_support("rawifi");
+		add_rc_support("switchctrl");
+		add_rc_support("manual_stb");
+		add_rc_support("11AC");
+		//add_rc_support("pwrctrl");
+		// the following values is model dep. so move it from default.c to here
+		nvram_set("wl0_HT_TxStream", "4");
+		nvram_set("wl0_HT_RxStream", "4");
+		nvram_set("wl1_HT_TxStream", "4");
+		nvram_set("wl1_HT_RxStream", "4");
+		break;
+#endif /* RT-E8820S */
+
+#if defined(RTMIR4A)
+	case MODEL_RTMIR4A:
+		nvram_set("boardflags", "0x100"); // although it is not used in ralink driver, set for vlan
+		nvram_set("vlan1hwname", "et0");  // vlan. used to get "%smacaddr" for compare and find parent interface.
+		nvram_set("lan_ifname", "br0");
+
+		wl_ifaces[WL_2G_BAND] = "ra0";
+		wl_ifaces[WL_5G_BAND] = "rai0";
+		set_basic_ifname_vars("eth3", "vlan1", wl_ifaces, NULL, "vlan1", NULL, "vlan3", NULL, 0);
+
+		nvram_set_int("btn_rst_gpio", 18|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_pwr_gpio",  8|GPIO_ACTIVE_LOW);
+
+		eval("rtkswitch", "11");
+
+		nvram_set("ct_max", "300000"); // force
+
+		add_rc_support("mssid");
+		add_rc_support("2.4G 5G noupdate");
+		add_rc_support("rawifi");
+		add_rc_support("11AC");
+		add_rc_support("loclist");
+		add_rc_support("mfp");
+		nvram_set("wl0_HT_TxStream", "2");
+		nvram_set("wl0_HT_RxStream", "2");
+		nvram_set("wl1_HT_TxStream", "2");
+		nvram_set("wl1_HT_RxStream", "2");
+		break;
+#endif /* RT-MIR4A */
+
+#if defined(RTMIR3G) || defined(RTR2100)
+#if defined(RTMIR3G)
+	case MODEL_RTMIR3G:
+#elif defined(RTR2100)
+	case MODEL_RTR2100:
+#endif
+		nvram_set("boardflags", "0x100"); // although it is not used in ralink driver, set for vlan
+		nvram_set("vlan1hwname", "et0");  // vlan. used to get "%smacaddr" for compare and find parent interface.
+		nvram_set("lan_ifname", "br0");
+
+		wl_ifaces[WL_2G_BAND] = "ra0";
+		wl_ifaces[WL_5G_BAND] = "rai0";
+		set_basic_ifname_vars("eth3", "vlan1", wl_ifaces, NULL, "vlan1", NULL, "vlan3", NULL, 0);
+
+		nvram_set_int("btn_rst_gpio", 18|GPIO_ACTIVE_LOW);
+#if defined(RTMIR3G)
+		nvram_set_int("led_pwr_gpio",  8|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_wan_gpio", 12|GPIO_ACTIVE_LOW);
+#else
+		nvram_set_int("led_pwr_gpio", 12|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_wan_gpio",  8|GPIO_ACTIVE_LOW);
+#endif
+
+		eval("rtkswitch", "11");
+
+		nvram_set("ct_max", "300000"); // force
+
+		add_rc_support("mssid");
+		add_rc_support("2.4G 5G noupdate");
+		add_rc_support("rawifi");
+		add_rc_support("11AC");
+		add_rc_support("loclist");
+		add_rc_support("mfp");
+		add_rc_support("vht160");
+		nvram_set("wl0_HT_TxStream", "2");
+		nvram_set("wl0_HT_RxStream", "2");
+		nvram_set("wl1_HT_TxStream", "4");
+		nvram_set("wl1_HT_RxStream", "4");
+		break;
+#endif /* RT-MIR3G/RT-R2100 */
+
 #if defined(RTAC85P) 
 	case MODEL_RTAC85P:
 		merlinr_init();
@@ -10752,7 +10868,7 @@ int init_main(int argc, char *argv[])
 			eval("rtk_hciattach","-n","-s","115200","/dev/ttyS1","rtk_h5","115200");
 #endif
 #endif
-			if (nvram_match("Ate_power_on_off_enable", "1")) {
+			if (/*nvram_match("Ate_power_on_off_enable", "1")*/ 0) {
 				Ate_on_off_led_start();
 				rc_check = nvram_get_int("Ate_rc_check");
 				boot_check = nvram_get_int("Ate_boot_check");
@@ -10921,7 +11037,7 @@ dbg("boot/continue fail= %d/%d\n", nvram_get_int("Ate_boot_fail"),nvram_get_int(
 			}
 #endif
 #ifdef RTCONFIG_RALINK
-			if(nvram_match("Ate_wan_to_lan", "1"))
+			if(/*nvram_match("Ate_wan_to_lan", "1")*/ 0)
 			{
 				printf("\n\n## ATE mode:set WAN to LAN... ##\n\n");
 				set_wantolan();
@@ -10950,9 +11066,9 @@ dbg("boot/continue fail= %d/%d\n", nvram_get_int("Ate_boot_fail"),nvram_get_int(
 			}
 #endif
 
-			if (nvram_match("Ate_power_on_off_enable", "3")|| //Show alert light
+			if (/*nvram_match("Ate_power_on_off_enable", "3")|| //Show alert light
 				nvram_match("Ate_power_on_off_enable", "4")||
-				nvram_match("Ate_power_on_off_enable", "5")  ) {
+				nvram_match("Ate_power_on_off_enable", "5")*/ 0 ) {
 				start_telnetd();
 				Ate_on_off_led_fail_loop();	// keep loop in this function
 			}
@@ -10967,7 +11083,7 @@ dbg("boot/continue fail= %d/%d\n", nvram_get_int("Ate_boot_fail"),nvram_get_int(
 
 			//For 66U normal boot & check device
 			if (((get_model()==MODEL_RTN66U) || (get_model()==MODEL_RTAC66U))
-			&& nvram_match("Ate_power_on_off_enable", "0")) {
+			&& nvram_match("Ate_power_on_off_enable", "0") && 0) {
 			    ate_dev_status();
 			    if (nvram_get_int("dev_fail_reboot")!=0) {
 				if (strchr(nvram_get("Ate_dev_status"), 'X')) {
@@ -11026,7 +11142,7 @@ dbg("boot/continue fail= %d/%d\n", nvram_get_int("Ate_boot_fail"),nvram_get_int(
 #endif	/* RTCONFIG_USB */
 
 
-			if (nvram_match("Ate_power_on_off_enable", "1")) {
+			if (/*nvram_match("Ate_power_on_off_enable", "1")*/ 0) {
 				dev_check = nvram_get_int("Ate_dev_check");
 				dev_fail = nvram_get_int("Ate_dev_fail");
 
@@ -11203,7 +11319,7 @@ dbg("boot/continue fail= %d/%d\n", nvram_get_int("Ate_boot_fail"),nvram_get_int(
 #endif
 
 #ifdef RTCONFIG_REALTEK
-			if (nvram_match("Ate_power_on_off_enable", "0")) {	/* avoid run in test to let all led off */
+			if (/*nvram_match("Ate_power_on_off_enable", "0")*/ 0) {	/* avoid run in test to let all led off */
 				if (sw_mode() == SW_MODE_REPEATER ||
 				    (sw_mode() == SW_MODE_AP && nvram_get_int("wlc_psta") == 1)) // Repeater and Media bridge mode
 					set_led(LED_OFF_ALL, LED_OFF_ALL);
@@ -11221,7 +11337,7 @@ dbg("boot/continue fail= %d/%d\n", nvram_get_int("Ate_boot_fail"),nvram_get_int(
 					set_led(wl0_stage, wl1_stage);
 				}
 			}
-			else if (nvram_match("Ate_power_on_off_enable", "2"))
+			else if (/*nvram_match("Ate_power_on_off_enable", "2")*/ 0)
 				setAllLedOn();
 #endif
 
@@ -11285,7 +11401,7 @@ int reboothalt_main(int argc, char *argv[])
 	_dprintf(reboot ? "Rebooting..." : "Shutting down...");
 	kill(1, reboot ? SIGTERM : SIGQUIT);
 
-#if defined(RTN14U) || defined(RTN65U) || defined(RTAC52U) || defined(RTAC51U) || defined(RTN11P) || defined(RTN300) || defined(RTN54U) || defined(RTCONFIG_QCA) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC85U) || defined(RTAC85P) || defined(RTN800HP) || defined(RTACRH26) || defined(RMAC2100)
+#if defined(RTN14U) || defined(RTN65U) || defined(RTAC52U) || defined(RTAC51U) || defined(RTN11P) || defined(RTN300) || defined(RTN54U) || defined(RTCONFIG_QCA) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC85U) || defined(RTAC85P) || defined(RTN800HP) || defined(RTACRH26) || defined(RTE8820S) || defined(RTMIR4A) || defined(RMAC2100) || defined(RTR2100)
 	def_reset_wait = 50;
 #endif
 

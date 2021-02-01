@@ -1860,7 +1860,7 @@ extern int start_tr(void);
 extern void stop_tr(void);
 extern int dhcpc_lease_main(int argc, char *argv[]);
 #endif
-#if defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
+#if defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 extern int dnsmasq_script_main(int argc, char **argv);
 #endif
 #ifdef RTCONFIG_NEW_USER_LOW_RSSI
