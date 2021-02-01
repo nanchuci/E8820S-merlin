@@ -53,7 +53,7 @@
 char *wlc_nvname(char *keyword);
 //#endif
 
-#if defined(RTAC52U) || defined(RTAC51U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC51UP) || defined(RTAC53) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100)
+#if defined(RTAC52U) || defined(RTAC51U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC51UP) || defined(RTAC53) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
 #define VHT_SUPPORT /* 11AC */
 #endif
 
@@ -862,7 +862,7 @@ int gen_ralink_config(int band, int is_iNIC)
 #endif	/* CE_ADAPTIVITY */
 	if (str && strlen(str))
 	{
-#if defined(RTAC1200HP) || defined(RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTAC85P) || defined(RMAC2100)
+#if defined(RTAC1200HP) || defined(RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
 		if(nvram_match("JP_CS","1"))
 			fprintf(fp, "CountryCode=JP\n");
 		else
@@ -1664,7 +1664,7 @@ int gen_ralink_config(int band, int is_iNIC)
 	{
 		fprintf(fp, "GreenAP=%d\n", 1);
 	}
-#elif defined(RTN14U) || defined(RTAC52U) || defined(RTAC51U) || defined(RTAC51UP) || defined(RTAC53) || defined(RTN11P) || defined(RTN300) || defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTCONFIG_MTK_REP)
+#elif defined(RTN14U) || defined(RTAC52U) || defined(RTAC51U) || defined(RTAC51UP) || defined(RTAC53) || defined(RTN11P) || defined(RTN300) || defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100) defined(RTCONFIG_MTK_REP)
 	/// MT7620 GreenAP will impact TSSI, force to disable GreenAP here..
 	//  MT7620 GreenAP cause bad site survey result on RTAC52 2G.
 	{
@@ -2314,6 +2314,10 @@ int gen_ralink_config(int band, int is_iNIC)
 			{
 				HTBW_MAX = 0;
 			}
+#if defined(VHT_SUPPORT)
+			if  ( Channel == 165)
+				VHTBW_MAX = 0;	//CANNOT use 80MHz
+#endif
 		}
 	}
 	else
@@ -2408,7 +2412,7 @@ int gen_ralink_config(int band, int is_iNIC)
 		
 
 		//HT_BSSCoexistence
-#if defined(RMAC2100)
+#if defined(RMAC2100) || defined(RTE8820S)
 	fprintf(fp, "HT_BSSCoexistence=%d\n", 0);
 #else
 		if ((wl_bw > 1) && (HTBW_MAX == 1) 
@@ -2468,7 +2472,7 @@ int gen_ralink_config(int band, int is_iNIC)
 	if (str && strlen(str))
 	{
 		fprintf(fp, "HT_GI=%d\n", atoi(str));
-#if defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) ||defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100)
+#if defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) ||defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S)
 #if defined(VHT_SUPPORT)
 		fprintf(fp, "VHT_SGI=%d\n", atoi(str));
 #endif
@@ -2478,14 +2482,14 @@ int gen_ralink_config(int band, int is_iNIC)
 	{
 		warning = 39;
 		fprintf(fp, "HT_GI=%d\n", 1);
-#if defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100)
+#if defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S)
 #if defined(VHT_SUPPORT)
 		fprintf(fp, "VHT_SGI=%d\n", 1);
 #endif
 #endif
 	}
 
-#if defined(RTN54U) || defined(RTAC1200HP) || defined(RTAC54U) || defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100)
+#if defined(RTN54U) || defined(RTAC1200HP) || defined(RTAC54U) || defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S)
 #if defined(VHT_SUPPORT)
 		fprintf(fp, "VHT_STBC=%d\n",1);
 		fprintf(fp, "VHT_LDPC=%d\n",1);
@@ -2567,6 +2571,10 @@ int gen_ralink_config(int band, int is_iNIC)
 		fprintf(fp, "VHT_BW=%d\n", 1);
 	else if(wl_bw == 3 && (HTBW_MAX == 1) && (VHTBW_MAX == 1))	// 80 MHz
 		fprintf(fp, "VHT_BW=%d\n", 1);
+	else if(wl_bw == 4 && (HTBW_MAX == 1) && (VHTBW_MAX == 1))	// 80+80 MHz
+		fprintf(fp, "VHT_BW=%d\n", 3);
+	else if(wl_bw == 5 && (HTBW_MAX == 1) && (VHTBW_MAX == 1))	// 160 MHz
+		fprintf(fp, "VHT_BW=%d\n", 2);
 #if defined(RTCONFIG_WIRELESSREPEATER) && defined(RTCONFIG_CONCURRENTREPEATER)
 	else if ((wlc_express - 1) == band)   //express way (apclii0)
 		fprintf(fp, "VHT_BW=%d\n", 1);
