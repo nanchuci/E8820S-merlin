@@ -285,6 +285,11 @@ config  RALINK_MT7603E
 	depends on WIFI_DRIVER
 	default n
 
+config  RALINK_MT7612E
+	bool
+	depends on WIFI_DRIVER
+	default n
+
 config  RT_DEBUG
 	bool
 	depends on WIFI_DRIVER
@@ -299,8 +304,6 @@ config  RT_READ_MAC_FROM_MTD
 	bool
 	depends on WIFI_DRIVER
 	default y
-
-config  RT2860V2_2850
 
 config  RT2860V2_2850
         bool "Dual Band"
@@ -392,7 +395,7 @@ endchoice
 #source "drivers/net/wireless/rlt_wifi/Kconfig"
 #source "drivers/net/wireless/mt_wifi/embedded/Kconfig"
 #source "drivers/net/wireless/mt_wifi_7615E_4411/embedded/Kconfig"
-source "drivers/net/wireless/ralink/mt7615/embedded/Kconfig"
+source "drivers/net/wireless/ralink/mt76x2/Kconfig"
 source "drivers/net/wireless/ralink/mt76x3/Kconfig"
 #source "drivers/net/wireless/mt_wifi_7615E_4421/embedded/Kconfig"
 
