@@ -59,7 +59,7 @@ obj-$(CONFIG_BRCMFMAC)	+= brcm80211/
 obj-$(CONFIG_BRCMSMAC)	+= brcm80211/
 
 obj-$(CONFIG_RALINK_MT7603E) += ralink/mt76x3_ap/
-obj-$(CONFIG_CHIP_MT7615E)       += ralink/mt7615_ap/
+obj-$(CONFIG_RALINK_MT7612E) += ralink/mt76x2_ap/
 
 ifneq ($(CONFIG_RLT_AP_SUPPORT),)
 obj-$(CONFIG_RLT_AP_SUPPORT)       += rlt_wifi_ap/
@@ -71,8 +71,8 @@ endif
 #obj-$(CONFIG_MT_AP_SUPPORT)       += mt_wifi_ap/
 #obj-$(CONFIG_CHIP_MT7615E)       += mt_wifi_ap_7615E_4421/
 #endif
-ifneq ($(CONFIG_MT_STA_SUPPORT),)
-obj-$(CONFIG_MT_STA_SUPPORT)      += mt_wifi_sta/
+#ifneq ($(CONFIG_MT_STA_SUPPORT),)
+#obj-$(CONFIG_MT_STA_SUPPORT)      += mt_wifi_sta/
 endif
 ifneq ($(CONFIG_WIFI_PKT_FWD),)
 obj-y                         += wifi_forward/wifi_hook/
