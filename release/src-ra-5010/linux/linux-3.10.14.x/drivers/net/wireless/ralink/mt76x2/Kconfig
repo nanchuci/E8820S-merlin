@@ -84,7 +84,7 @@ config DOT11_VHT_AC
 config DOT11W_PMF_SUPPORT
 	bool "PMF Support"
 	depends on WIFI_DRIVER
-    	default y
+    	default n
 
 config TXBF_SUPPORT
     	bool "Tx Bean Forming Support"
@@ -99,7 +99,7 @@ config TXBF_SUPPORT
 config LLTD_SUPPORT
 	bool "LLTD (Link Layer Topology Discovery Protocol)"
 	depends on WIFI_DRIVER
-    	default y
+    	default n
 
 config QOS_DLS_SUPPORT
 	bool "802.11e DLS ((Direct-Link Setup) Support"
@@ -109,7 +109,7 @@ config QOS_DLS_SUPPORT
 config WAPI_SUPPORT
 	bool "WAPI Support"
 	depends on WIFI_DRIVER
-    	default y
+    	default n
 
 config CARRIER_DETECTION_SUPPORT
 	bool "Carrier Detect"
@@ -144,7 +144,7 @@ config BLOCK_NET_IF
 config RATE_ADAPTION
     	bool "New Rate Adaptation Support"
     	depends on WIFI_DRIVER
-    	default y
+    	default n
 
 config NEW_RATE_ADAPT_SUPPORT
     	bool "Intelligent Rate Adaption"
@@ -181,7 +181,7 @@ config RTMP_FLASH_SUPPORT
 config LED_CONTROL_SUPPORT
 	bool "LED Control Support"
 	depends on WIFI_DRIVER
-    	default y
+    	default n
 
 config SINGLE_SKU_V2
     	bool "Single SKU V2"
@@ -197,7 +197,7 @@ config HW_ANTENNA_DIVERSITY
 config ATE_SUPPORT
 	bool "ATE/QA Support"
 	depends on WIFI_DRIVER
-    	default y
+    	default n
 
 config  RT2860V2_AP_32B_DESC
 	bool "32 Byte Descriptor Support"
@@ -244,24 +244,24 @@ menu "PA/LNA Settings of 1st Card"
 config FIRST_CARD_EXTERNAL_PA
         bool "External Power Amplifier(PA)"
         depends on WIFI_DRIVER
-    default y
+    default n
 
 config FIRST_CARD_EXTERNAL_LNA
         bool "External Low-Noise Amplifier(LNA)"
         depends on WIFI_DRIVER
-    default y
+    default n
 endmenu
 
 menu "PA/LNA Settings of 2nd Card"
 config SECOND_CARD_EXTERNAL_PA
         bool "External Power Amplifier(PA)"
         depends on WIFI_DRIVER
-    default y
+    default n
 
 config SECOND_CARD_EXTERNAL_LNA
         bool "External Low-Noise Amplifier(LNA)"
         depends on WIFI_DRIVER
-    default y
+    default n
 endmenu
 
 #
