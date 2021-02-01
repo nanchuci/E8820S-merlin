@@ -459,7 +459,7 @@ define platformKernelConfig
 		sed -i "/CONFIG_DOT11_VHT_AC/d" $(1); \
 		echo "CONFIG_DOT11_VHT_AC=y" >>$(1); \
 		sed -i "/CONFIG_DOT11W_PMF_SUPPORT/d" $(1); \
-		echo "# CONFIG_DOT11W_PMF_SUPPORT is not set" >>$(1); \
+		echo "CONFIG_DOT11W_PMF_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_TXBF_SUPPORT/d" $(1); \
 		echo "# CONFIG_TXBF_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_LLTD_SUPPORT/d" $(1); \
@@ -540,7 +540,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RLT_MAC/d" $(1); \
 			echo "#CONFIG_RLT_MAC is not set" >>$(1); \
 		fi; \
-		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] ; then \
+		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] || [ "$(RTE8820S)" = "y" ] || [ "$(RTMIR4A)" = "y" ] || [ "$(RTRM2100)" = "y" ] || [ "$(RTR2100)" = "y" ]; then \
 			sed -i "/CONFIG_RA_HW_NAT_IPV6/d" $(1); \
 			echo "CONFIG_RA_HW_NAT_IPV6=y" >>$(1); \
 			sed -i "/CONFIG_RAETH_8023AZ_EEE/d" $(1); \
@@ -629,7 +629,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 			echo "CONFIG_APCLI_SUPPORT=y" >>$(1); \
 			sed -i "/CONFIG_MAC_REPEATER_SUPPORT/d" $(1); \
-			echo "# CONFIG_MAC_REPEATER_SUPPORT is not set" >>$(1); \
+			echo "CONFIG_MAC_REPEATER_SUPPORT=y" >>$(1); \
 			sed -i "/CONFIG_APCLI_CERT_SUPPORT/d" $(1); \
 			echo "# CONFIG_APCLI_CERT_SUPPORT is not set" >>$(1); \
 		fi; \
@@ -706,7 +706,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RT2860V2_AP_CARRIER/d" $(1); \
 			echo "CONFIG_RT2860V2_AP_CARRIER=y" >>$(1); \
 	fi; \
-	if [ "$(RTAC85P)" = "y" ] || [ "$(RMAC2100)" = "y" ]; then \
+	if [ "$(RTAC85P)" = "y" ] || [ "$(RMAC2100)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
 			sed -i "/CONFIG_NF_CT_NETLINK/d" $(1); \
 			echo "CONFIG_NF_CT_NETLINK=m" >>$(1); \
 			sed -i "/CONFIG_NF_CT_NETLINK_TIMEOUT/d" $(1); \
