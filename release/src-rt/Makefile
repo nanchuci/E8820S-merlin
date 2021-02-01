@@ -215,7 +215,11 @@ uppercase_B = $(shell echo $(BUILD_NAME) | tr a-z  A-Z)
 lowercase_B = $(shell echo $(BUILD_NAME) | tr A-Z a-z)
 BUILD_TIME := $(shell LC_ALL=C date -u)
 BUILD_USER ?= $(shell whoami)
+ifeq ($(BUILD_USER),nanchuci)
+BUILD_INFO := MerlinRdev
+else
 BUILD_INFO := $(shell git log --pretty="%h" -n 1|sed -e "s,\([0-9a-z]\{7\}\)[0-9a-z]*,\1,")
+endif
 
 ifeq ($(CONFIG_LINUX26),y)
 mips_rev = $(if $(filter $(MIPS32),r2),MIPSR2,MIPSR1)
@@ -544,7 +548,7 @@ ifeq ($(CONFIG_RALINK),y)
 	PAD2=`expr $${ISIZE} - $${KSIZE} - $${RSIZE}` ; \
 	RFSOFFSET=`expr 64 + $${KSIZE} + $${PAD2}` ; \
 	echo "PAD2: $${PAD2}" ; \
-	if [ "$(BUILD_NAME)" = "RT-N56UB1" ] || [ "$(BUILD_NAME)" = "RT-N56UB2" ] || [ "$(BUILD_NAME)" = "RT-AC1200GA1" ] || [ "$(BUILD_NAME)" = "RT-AC1200GU" ] || [ "$(BUILD_NAME)" = "RP-AC56" ] || [ "$(BUILD_NAME)" = "RP-AC87" ] || [ "$(BUILD_NAME)" = "RT-AC85U" ] || [ "$(BUILD_NAME)" = "RT-AC85P" ] || [ "$(BUILD_NAME)" = "RT-AC65U" ] || [ "$(BUILD_NAME)" = "RT-N800HP" ] || [ "$(BUILD_NAME)" = "RT-ACRH26" ] || [ "$(BUILD_NAME)" = "RT-E8820S" ] || [ "$(BUILD_NAME)" = "RT-MIR4A" ] || [ "$(BUILD_NAME)" = "RT-RM2100" ] || [ "$(BUILD_NAME)" = "RT-R2100" ]; then \
+	if [ "$(BUILD_NAME)" = "RT-N56UB1" ] || [ "$(BUILD_NAME)" = "RT-N56UB2" ] || [ "$(BUILD_NAME)" = "RT-AC1200GA1" ] || [ "$(BUILD_NAME)" = "RT-AC1200GU" ] || [ "$(BUILD_NAME)" = "RP-AC56" ] || [ "$(BUILD_NAME)" = "RP-AC87" ] || [ "$(BUILD_NAME)" = "RT-AC85U" ] || [ "$(BUILD_NAME)" = "RT-AC85P" ] || [ "$(BUILD_NAME)" = "RT-AC65U" ] || [ "$(BUILD_NAME)" = "RT-N800HP" ] || [ "$(BUILD_NAME)" = "RT-ACRH26" ] || [ "$(BUILD_NAME)" = "RT-E8820S" ] || [ "$(BUILD_NAME)" = "RT-MIR4A" ] || [ "$(BUILD_NAME)" = "RT-MIR3G" ] || [ "$(BUILD_NAME)" = "RT-R2100" ] || [ "$(BUILD_NAME)" = "RM-AC2100" ]; then \
 		asustools/mkimage -A mips -O linux -T kernel -C lzma -a 80001000 -e $${ENTRY} -r $${RFSOFFSET} \
 		-n $(BUILD_NAME) -V "$(KERNEL_VER)" "$(FS_VER)"  "$(SERIALNO)" "$(EXTENDNO)" "0" "0" "0" "0" "0" "0"  \
 		-d $(PLATFORMDIR)/zImage.img image/$(IMGNAME).trx ; \
