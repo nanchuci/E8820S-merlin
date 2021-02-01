@@ -4174,9 +4174,10 @@ endif
 	fi
 
 	@if grep -q "CONFIG_RALINK_MT7612E=y" $(LINUXDIR)/.config ; then \
-		sed -i "/RTCONFIG_WLMODULE_MT7615E_AP/d" router/.config; \
+		sed -i "/RTCONFIG_WLMODULE_MT7612E_AP/d" router/.config; \
 		echo "RTCONFIG_WLMODULE_MT7612E_AP=y" >> router/.config; \
 	fi
+	
 	@if grep -q "CONFIG_RALINK_MT7615E=y" $(LINUXDIR)/.config ; then \
 		sed -i "/RTCONFIG_WLMODULE_MT7615E_AP/d" router/.config; \
 		echo "RTCONFIG_WLMODULE_MT7615E_AP=y" >> router/.config; \
