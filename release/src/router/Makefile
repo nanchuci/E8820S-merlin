@@ -2986,96 +2986,6 @@ iptables-1.4.x-clean:
 	[ ! -f iptables-1.4.x/Makefile ] || $(MAKE) -C iptables-1.4.x KERNEL_DIR=$(LINUX_INC_DIR) distclean
 	@rm -f iptables-1.4.x/Makefile
 
-ifeq ($(RTCONFIG_SOFTCENTER),y)
-libev-4.22/configure:
-	cd libev-4.22 && ./autogen.sh
-
-libev-4.22/Makefile: libev-4.22/configure
-	cd libev-4.22 && $(CONFIGURE)\
-		--target=arm-linux --host=arm-linux --build=x86_64-linux-gnu --program-prefix= --program-suffix= \
-		--prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --libexecdir=/usr/lib --sysconfdir=/etc \
-		--datadir=/usr/share --localstatedir=/var --mandir=/usr/man --infodir=/usr/info --disable-nls --enable-shared --enable-static
-
-libev-4.22: libev-4.22/Makefile
-	$(MAKE) -C $@ && $(MAKE) $@-stage
-
-libev-4.22-clean:
-	[ ! -f libev-4.22/Makefile ] || $(MAKE) -C libev-4.22 -f Makefile distclean
-	@rm -f libev.la
-	@rm -f libev-4.22/stamp-h1
-	@rm -f libev-4.22/.libs
-	@rm -f libev-4.22/.deps
-
-libev-4.22-install:
-	install -D $(STAGEDIR)/usr/lib/libev.so.4.0.0 $(INSTALLDIR)/libev-4.22/usr/lib/libev.so.4.0.0
-	$(STRIP) $(INSTALLDIR)/libev-4.22/usr/lib/libev.so.4.0.0
-	cd $(INSTALLDIR)/libev-4.22/usr/lib && \
-		ln -sf libev.so.4.0.0 libev.so.4 && \
-		ln -sf libev.so.4.0.0 libev.so
-
-skipdbv2/Makefile: skipdbv2/CMakeLists.txt
-	cd skipdbv2 && cmake -DCMAKE_INSTALL_PREFIX=/usr \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_EXE_LINKER_FLAGS="-L$(STAGEDIR)/usr/lib -lev" \
-	-DLIBEV_INCLUDE_DIRS="$(TOP)/libev-4.22" \
-	-DLIBEV_LIBRARIES="$(TOP)/libev-4.22/.libs"
-
-skipdbv2: libev-4.22 skipdbv2/Makefile
-	$(MAKE) -C $@
-
-skipdbv2-clean:
-	[ ! -f skipdbv2/Makefile ] || $(MAKE) -C skipdbv2 -f Makefile clean
-	@rm -rf skipdbv2/bin
-	@rm -rf skipdbv2/lib
-	@rm -rf skipdbv2/CMakeFiles
-	@rm -f skipdbv2/CMakeCache.txt
-	@rm -f skipdbv2/cmake_install.cmake
-	@rm -f skipdbv2/Makefile
-
-skipdbv2-install: skipdbv2
-	install -D skipdbv2/bin/skipd $(INSTALLDIR)/skipdbv2/usr/sbin/skipd
-	install -D skipdbv2/bin/dbus $(INSTALLDIR)/skipdbv2/usr/sbin/dbus
-	$(STRIP) $(INSTALLDIR)/skipdbv2/usr/sbin/skipd
-	$(STRIP) $(INSTALLDIR)/skipdbv2/usr/sbin/dbus
-
-ipset/stamp-h1: libmnl-1.0.4
-	cd $(TOP)/ipset && CC=$(CC) \
-	autoreconf -i -f && \
-	CFLAGS="-Os -Wall $(EXTRACFLAGS) -ffunction-sections -fdata-sections" \
-	LDFLAGS="-ffunction-sections -fdata-sections -Wl,--gc-sections" \
-	libmnl_CFLAGS="-I$(TOP)/libmnl-1.0.4/include" \
-	libmnl_LIBS="-L$(TOP)/libmnl-1.0.4/src/.libs -lmnl" \
-	$(CONFIGURE) --prefix=/usr --with-kmod=no --with-kbuild=$(LINUXDIR)
-	touch ipset/stamp-h1
-
-ipset: ipset/stamp-h1
-	$(MAKE) -C ipset
-	$(MAKE) -C ipset modules
-
-ipset-install:
-	install -D ipset/src/ipset $(INSTALLDIR)/ipset/usr/sbin/ipset
-	install -d $(INSTALLDIR)/ipset/usr/lib/
-	install ipset/lib/.libs/libipset.so.3.6.0 $(INSTALLDIR)/ipset/usr/lib/libipset.so.3.6.0
-	$(STRIP) $(INSTALLDIR)/ipset/usr/lib/libipset.so.3.6.0
-	$(STRIP) $(INSTALLDIR)/ipset/usr/sbin/ipset
-	cd $(INSTALLDIR)/ipset/usr/lib/ && \
-		ln -sf libipset.so.3.6.0 libipset.so.3 && \
-		ln -sf libipset.so.3.6.0 libipset.so
-
-ipset-clean:
-	-@$(MAKE) -C ipset clean
-	-@$(MAKE) -C ipset modules_clean
-	-@rm -rf ipset/Makefile ipset/stamp-h1
-
-mbedtls-2.6.0/stamp-h1:
-	cd mbedtls-2.6.0 && cmake -DCMAKE_INSTALL_PREFIX=/usr \
-	-DUSE_SHARED_MBEDTLS_LIBRARY=ON \
-	-DENABLE_TESTING=OFF \
-	-DENABLE_PROGRAMS=ON
-
-mbedtls-2.6.0: mbedtls-2.6.0/stamp-h1
-	$(MAKE) -C $@
-
 mbedtls-2.6.0-clean:
 	[ ! -f mbedtls-2.16.3/Makefile ] || $(MAKE) -C mbedtls-2.16.3 -f Makefile clean
 
@@ -3266,36 +3176,37 @@ libupnp-1.3.1/Makefile: libupnp-1.3.1/Makefile.in
 		$(CONFIGURE) --prefix=/usr --disable-dependency-tracking \
 	)
 
-libusb10/stamp-h1:
-	cd libusb10 && CFLAGS="-Os -Wall $(EXTRACFLAGS)" LIBS="-lpthread -ldl -lc $(EXTRALDFLAGS)" \
-	$(CONFIGURE) --enable-shared --prefix=/usr ac_cv_lib_rt_clock_gettime=no
-	-@$(MAKE) -C libusb10 clean
-	touch $@
+libusb10/Makefile:
+	cd libusb10 && \
+	$(CONFIGURE) --enable-shared --prefix=/usr --disable-udev \
+		CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
+		LIBS="-lpthread -ldl -lc $(EXTRALDFLAGS)" \
+		ac_cv_lib_rt_clock_gettime=no
 
-libusb10: libusb10/stamp-h1
+libusb10: libusb10/Makefile
 	$(MAKE) -C $@
 
 libusb10-install: libusb10
-	install -D libusb10/libusb/.libs/libusb-1.0.so.0.0.0 $(INSTALLDIR)/libusb10/usr/lib/libusb-1.0.so.0
+	install -D libusb10/libusb/.libs/libusb-1.0.so.0.2.0 $(INSTALLDIR)/libusb10/usr/lib/libusb-1.0.so.0
 	$(STRIP) $(INSTALLDIR)/libusb10/usr/lib/*.so.*
 	cd $(INSTALLDIR)/libusb10/usr/lib && \
-		ln -sf libusb-1.0.so.0 libusb-1.0.so.0.0.0 && \
+		ln -sf libusb-1.0.so.0 libusb-1.0.so.0.2.0 && \
 		ln -sf libusb-1.0.so.0 libusb-1.0.so
 
 libusb10-clean:
-	-@$(MAKE) -C libusb10 clean
-	@rm -f libusb10/stamp-h1
+	[ ! -f libusb10/Makefile ] || $(MAKE) -C libusb10 distclean
+	@rm -f libusb10/Makefile
 
-libusb/stamp-h1:
-	cd libusb && CFLAGS="-Wall -Os $(EXTRACFLAGS)" LIBS="-lpthread -ldl -lc $(EXTRALDFLAGS)" \
-	$(CONFIGURE) --prefix=/usr \
+libusb/Makefile:
+	cd libusb && \
+	$(CONFIGURE) --enable-shared --prefix=/usr \
+		CFLAGS="-Os -Wall $(EXTRACFLAGS)" \
+		LIBS="-lpthread -ldl -lc $(EXTRALDFLAGS)" \
 		LIBUSB_1_0_CFLAGS="-I$(TOP)/libusb10/libusb" \
 		LIBUSB_1_0_LIBS="-L$(TOP)/libusb10/libusb/.libs -lusb-1.0 \
 		-Wl,-R/lib:/usr/lib:/opt/usr/lib:/usr/local/share"
-	-@$(MAKE) -C libusb clean
-	touch $@
 
-libusb: libusb10 libusb/stamp-h1
+libusb: libusb10 libusb/Makefile
 	$(MAKE) -C $@
 
 libusb-install: libusb
@@ -3306,8 +3217,8 @@ libusb-install: libusb
 		ln -sf libusb-0.1.so.4 libusb.so
 
 libusb-clean:
-	-@$(MAKE) -C libusb clean
-	@rm -f libusb/stamp-h1
+	[ ! -f libusb/Makefile ] || $(MAKE) -C libusb distclean
+	@rm -f libusb/Makefile
 
 usb-modeswitch-1.2.3: libusb
 	$(MAKE) -C $@ CC=$(CC) CFLAGS="-Os $(EXTRACFLAGS) -I$(TOP)/libusb/libusb" LIBS="\
@@ -7245,38 +7156,6 @@ phddns-install: phddns
 phddns-clean:
 	@[ ! -f phddns/Makefile ] || $(MAKE) -C phddns clean
 	@rm -f phddns/stamp-h1
-
-acme-client-portable:
-	$(MAKE) -C acme-client-portable
-
-acme-client-portable-install: acme-client-portable
-	install -D acme-client-portable/acme-client $(INSTALLDIR)/acme-client-portable/usr/sbin/acme-client
-	$(STRIP) $(INSTALLDIR)/acme-client-portable/usr/sbin/acme-client
-
-lighttpd-le/stamp-h1:
-	cd lighttpd-le && ./autogen.sh && \
-	$(CONFIGURE) \
-	--prefix=/usr/local \
-	--without-pcre \
-	--with-openssl=$(TOP)/openssl \
-	--without-zlib \
-	--without-bzip2
-	@touch $@
-
-lighttpd-le: lighttpd-le/stamp-h1
-	$(MAKE) -C lighttpd-le
-
-lighttpd-le-clean:
-	-@$(MAKE) -C lighttpd-le clean
-	@rm -f lighttpd-le/stamp-h1
-
-lighttpd-le-install: lighttpd-le
-	install -D lighttpd-le/src/lighttpd $(INSTALLDIR)/lighttpd-le/usr/sbin/lighttpd
-	install -D lighttpd-le/src/.libs/mod_dirlisting.so $(INSTALLDIR)/lighttpd-le/usr/local/lib/mod_dirlisting.so
-	install -D lighttpd-le/src/.libs/mod_staticfile.so $(INSTALLDIR)/lighttpd-le/usr/local/lib/mod_staticfile.so
-	install -D lighttpd-le/src/.libs/mod_indexfile.so $(INSTALLDIR)/lighttpd-le/usr/local/lib/mod_indexfile.so
-	$(STRIP) $(INSTALLDIR)/lighttpd-le/usr/sbin/lighttpd
-	$(STRIP) $(INSTALLDIR)/lighttpd-le/usr/local/lib/mod_*.so
 
 quicksec-7.0:
 	@$(SEP)
