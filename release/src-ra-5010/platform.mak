@@ -85,7 +85,7 @@ DRAM_POOL = 		\
 	"512M"		
 
 FIRST_IF_POOL =		\
-	"NONE"	\
+	"NONE"		\
 	"RT2860"	\
 	"RT3092"	\
 	"RT5392"	\
