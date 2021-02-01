@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: E8820S-asuswrt-packages
+        name: E8820S-merlin-packages
         path: /opt/asus/release/src-ra-5010/image
     - name: Upload firmware to cowtransfer
       if: always()
