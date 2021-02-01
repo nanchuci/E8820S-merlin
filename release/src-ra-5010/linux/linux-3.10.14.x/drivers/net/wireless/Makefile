@@ -73,7 +73,7 @@ endif
 #endif
 #ifneq ($(CONFIG_MT_STA_SUPPORT),)
 #obj-$(CONFIG_MT_STA_SUPPORT)      += mt_wifi_sta/
-endif
+#endif
 ifneq ($(CONFIG_WIFI_PKT_FWD),)
 obj-y                         += wifi_forward/wifi_hook/
 endif
