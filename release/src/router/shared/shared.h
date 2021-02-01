@@ -701,6 +701,11 @@ enum {
 	MODEL_GTAX6000S,
 };
 
+#define MODEL_RTE8820S MODEL_RTAC85U
+#define MODEL_RTMIR4A MODEL_RTAC85U
+#define MODEL_RTMIR3G MODEL_RTAC85U
+#define MODEL_RTR2100 MODEL_RTAC85U
+
 /* NOTE: Do not insert new entries in the middle of this enum,
  * always add them to the end! */
 enum {
@@ -2310,6 +2315,7 @@ extern int detwan_set_def_vid(const char *ifname, int vid, int needTagged, int a
 extern int IPTV_ports_cnt(void);
 
 #ifdef RTCONFIG_BCMWL6
+#define WL_5G_BAND_1	1 << (1 - 1)
 #define WL_5G_BAND_2	1 << (2 - 1)
 #define WL_5G_BAND_3	1 << (3 - 1)
 #define WL_5G_BAND_4	1 << (4 - 1)
