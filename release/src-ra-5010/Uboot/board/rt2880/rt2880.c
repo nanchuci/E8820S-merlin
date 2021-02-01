@@ -193,6 +193,8 @@ const char *model =
 	"RT-AC85U";
 #elif defined(CONFIG_RTAC85P)
 	"RT-AC85P";
+#elif defined(CONFIG_RTE8820S)
+	"RT-E8820S";
 #elif defined(CONFIG_RTACRH26)
 	"RT-ACRH26";
 #elif defined(CONFIG_RMAC2100)
@@ -239,6 +241,8 @@ const char *blver =
 #elif defined(ASUS_RTACRH26)
 	"1000";
 #elif defined(CONFIG_RMAC2100)
+	"1000";
+#elif defined(CONFIG_RTE8820S)
 	"1000";
 #elif defined(CONFIG_RTN800HP)
 	"1000";
