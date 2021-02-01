@@ -157,12 +157,14 @@ void merlinr_init_done()
 		nvram_set("modelname", "RTAC85P");
 #elif defined(RMAC2100)
 		nvram_set("modelname", "RMAC2100");
+#elif defined(RTE8820S)
+		nvram_set("modelname", "RTE8820S");
 #endif
 #if defined(R8000P) || defined(R7900P)
 	nvram_set("ping_target","www.taobao.com");
 #endif
 	nvram_commit();
-#if defined(RMAC2100)
+#if defined(RMAC2100) ||  defined(RTE8820S)
 	patch_Factory();
 #endif
 }
@@ -386,7 +388,7 @@ int merlinr_firmware_check_update_main(int argc, char *argv[])
 					//_dprintf("%s#%s\n",fwver,cur_fwver);
 					if(versioncmp((cur_fwver+1),(fwver+1))==1){
 						nvram_set("webs_state_url", "");
-#if (defined(RTAC82U) && !defined(RTCONFIG_AMAS)) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
+#if (defined(RTAC82U) && !defined(RTCONFIG_AMAS)) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 						snprintf(info,sizeof(info),"3004_382_%s_%s-%s",modelname,fwver,tag);
 #elif (defined(RTAC82U) && defined(RTCONFIG_AMAS)) || defined(RTAC95U) || defined(RTAX56_XD4) || defined(RTAX95Q)
 						snprintf(info,sizeof(info),"3004_386_%s_%s-%s",modelname,fwver,tag);
@@ -443,7 +445,7 @@ int merlinr_firmware_check_update_main(int argc, char *argv[])
 	curl_global_cleanup();
 
 GODONE:
-#if (defined(RTAC82U) && !defined(RTCONFIG_AMAS)) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
+#if (defined(RTAC82U) && !defined(RTCONFIG_AMAS)) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 	snprintf(info,sizeof(info),"3004_382_%s",nvram_get("extendno"));
 #elif (defined(RTAC82U) && defined(RTCONFIG_AMAS)) || defined(RTAC95U) || defined(RTAX56_XD4) || defined(RTAX95Q)
 	snprintf(info,sizeof(info),"3004_386_%s",nvram_get("extendno"));
