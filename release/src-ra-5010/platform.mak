@@ -10,7 +10,7 @@ export PLATFORM_ARCH := mipsel-uclibc
 export CROSS_COMPILE := mipsel-uclibc-
 export CROSS_COMPILER := $(CROSS_COMPILE)
 export READELF := mipsel-linux-readelf
-export CONFIGURE := ./configure --host=mipsel-linux --build=$(BUILD)
+export CONFIGURE := $ bash./configure --host=mipsel-linux --build=$(BUILD)
 export HOSTCONFIG := linux-mipsel
 export ARCH := mips
 export HOST := mipsel-linux
@@ -507,7 +507,7 @@ define platformKernelConfig
 		echo "# CONFIG_HOTSPOT is not set" >>$(1); \
 		sed -i "/CONFIG_CO_CLOCK_SUPPORT/d" $(1); \
 		echo "# CONFIG_CO_CLOCK_SUPPORT is not set" >>$(1); \
-		if [ "$(RTN56UB1)" = "y" ] || [ "$(RTN56UB2)" = "y" ] ; then \
+		if [ "$(RTN56UB1)" = "y" ] || [ "$(RTN56UB2)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
 			if [ "$(MT7603_EXTERNAL_PA_EXTERNAL_LNA)" = "y" ] ; then \
 				sed -i "/CONFIG_FIRST_CARD_EXTERNAL_PA/d" $(1); \
 				echo "CONFIG_FIRST_CARD_EXTERNAL_PA=y" >>$(1); \
@@ -525,7 +525,7 @@ define platformKernelConfig
 				sed -i "/CONFIG_FIRST_CARD_EXTERNAL_LNA/d" $(1); \
 				echo "# CONFIG_FIRST_CARD_EXTERNAL_LNA is not set " >>$(1); \
 		fi; \
-		if [ "$(RTAC1200HP)" = "y" ] ; then \
+		if [ "$(RTAC1200HP)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_PA/d" $(1); \
 			echo "CONFIG_SECOND_CARD_EXTERNAL_PA=y" >>$(1); \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_LNA/d" $(1); \
