@@ -10,7 +10,7 @@ export PLATFORM_ARCH := mipsel-uclibc
 export CROSS_COMPILE := mipsel-uclibc-
 export CROSS_COMPILER := $(CROSS_COMPILE)
 export READELF := mipsel-linux-readelf
-export CONFIGURE := $ bash./configure --host=mipsel-linux --build=$(BUILD)
+export CONFIGURE := ./configure --host=mipsel-linux --build=$(BUILD)
 export HOSTCONFIG := linux-mipsel
 export ARCH := mips
 export HOST := mipsel-linux
