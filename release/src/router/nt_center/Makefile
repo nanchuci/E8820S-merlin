@@ -43,7 +43,6 @@ all:
 	-cp -f prebuild/nt_monitor nt_monitor
 	-cp -f lib/prebuild/libnt.so lib
 	-cp -f lib/prebuild/nt_db lib
-	-cp -f lib/prebuild/*.h lib
 
 else
 all: ntdir nt_center Notify_Event2NC  nt_monitor
