@@ -422,7 +422,7 @@ ifeq ($(HND_ROUTER),y)
 export BUSYBOX ?= busybox-1.24.1
 export BUSYBOX_DIR := busybox-1.24.1/busybox-1.24.1
 else
-export BUSYBOX ?= busybox
+export BUSYBOX ?= busybox-1.17.4
 export BUSYBOX_DIR := $(BUSYBOX)
 endif
 obj-y += $(BUSYBOX)
