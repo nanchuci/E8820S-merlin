@@ -34,7 +34,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-last
+    runs-on: ubuntu-18.04
 
     steps:
     - name: Checkout
