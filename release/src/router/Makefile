@@ -5463,24 +5463,6 @@ sw-hw-auth-clean:
 
 #add by alan
 #add install neon
-neon/stamp-h1 neon/config.h:
-	cd neon && \
-	$(CONFIGURE) CC=$(CC) \
-		--prefix=/usr \
-		--bindir=/usr/sbin \
-		--libdir=/usr/lib \
-		--enable-shared --disable-static --disable-nls --with-zlib --with-ssl=openssl --with-libxml2 \
-		--with-libs=$(STAGEDIR)/usr \
-		CFLAGS='-g -O2 -I$(STAGEDIR)/usr/include' \
-		LDFLAGS='-L$(STAGEDIR)/usr/lib' \
-		LIBS='-lxml2 -lssl -lcrypto -lpthread -ldl -lm' \
-		XML2_CONFIG='$(STAGEDIR)/usr/bin/xml2-config --prefix=$(STAGEDIR)/usr'
-	cp -f neon/config.h neon/src/config.h
-	touch $@
-
-neon: libxml2 openssl neon/stamp-h1 neon/config.h
-	$(MAKE) -C neon && $(MAKE) $@-stage
-
 neon-install: neon
 	@$(SEP)
 	install -D neon/src/.libs/libneon.so.27.2.6 $(INSTALLDIR)/neon/usr/lib/libneon.so.27.2.6
