@@ -33,7 +33,7 @@
 #define REG_ESW_VLAN_VAWD1		0x94
 #define REG_ESW_VLAN_VAWD2		0x98
 
-#if !(defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU) || defined(RPAC87) || defined(RTAC85U) || defined(RTAC85P) || defined(RTAC65U) || defined(RTN800HP) || defined(RTACRH26) || defined(RMAC2100 || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)) //MT7621 don't use it
+#if !(defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU) || defined(RPAC87) || defined(RTAC85U) || defined(RTAC85P) || defined(RTAC65U) || defined(RTN800HP) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)) //MT7621 don't use it
 #define REG_ESW_VLAN_ID_BASE		0x100
 #endif
 //#define REG_ESW_VLAN_ID_BASE		0x50
