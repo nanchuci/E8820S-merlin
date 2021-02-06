@@ -483,12 +483,12 @@ obj-y += wireless_tools
 
 obj-y += $(if $(RTN65U),rt2880_app,flash)
 ifeq ($(RTN65U),)
-obj-y += $(if $(or $(RTN14U),$(RTAC52U),$(RTAC51U),$(RTN11P),$(RTN300),$(RTN54U),$(RTAC1200HP),$(RTN56UB1),$(RTN56UB2),$(RTAC54U),$(RTAC51UP),$(RTAC53),$(RTAC1200),$(RTAC1200GA1),$(RTAC1200GU),$(RTN600),$(RTN11PB1),$(RPAC87),$(RTAC85U),$(RTAC85P),$(RTN800HP),$(RTACRH26),$(RMAC2100)),reg,hw_nat)
+obj-y += $(if $(or $(RTN14U),$(RTAC52U),$(RTAC51U),$(RTN11P),$(RTN300),$(RTN54U),$(RTAC1200HP),$(RTN56UB1),$(RTN56UB2),$(RTAC54U),$(RTAC51UP),$(RTAC53),$(RTAC1200),$(RTAC1200GA1),$(RTAC1200GU),$(RTN600),$(RTN11PB1),$(RPAC87),$(RTAC85U),$(RTAC85P),$(RTN800HP),$(RTACRH26),$(RMAC2100),$(RTE8820S)),reg,hw_nat)
 obj-y += $(if $(RTCONFIG_ATED122),ated_1.2.2,ated)
 endif
 obj-y += $(if $(RTCONFIG_MII_MGR),mii_mgr)
 
-ifeq ($(or $(RTAC85P),$(RTN800HP),$(RTACRH26),$(RMAC2100),$(RTE8820S),$(RTMIR4A),$(RTMIR3G),$(RTR2100)),y)
+ifeq ($(or $(RTAC85P),$(RTN800HP),$(RTACRH26),$(RMAC2100),$(RTE8820S)),y)
 obj-y += switch
 endif
 
@@ -5463,7 +5463,7 @@ sw-hw-auth-clean:
 
 #add by alan
 #add install neon
-neon/stamp-h1 neon/config.h.in:
+neon/stamp-h1 neon/config.h:
 	cd neon && \
 	$(CONFIGURE) CC=$(CC) \
 		--prefix=/usr \
@@ -5475,10 +5475,10 @@ neon/stamp-h1 neon/config.h.in:
 		LDFLAGS='-L$(STAGEDIR)/usr/lib' \
 		LIBS='-lxml2 -lssl -lcrypto -lpthread -ldl -lm' \
 		XML2_CONFIG='$(STAGEDIR)/usr/bin/xml2-config --prefix=$(STAGEDIR)/usr'
-	cp -f neon/config.h.in neon/src/config.h.in
+	cp -f neon/config.h neon/src/config.h
 	touch $@
 
-neon: libxml2 openssl neon/stamp-h1 neon/config.h.in
+neon: libxml2 openssl neon/stamp-h1 neon/config.h
 	$(MAKE) -C neon && $(MAKE) $@-stage
 
 neon-install: neon
@@ -5547,7 +5547,7 @@ curl-7.21.7-install: curl-7.21.7
 	install -D curl-7.21.7/lib/.libs/libcurl.so.4.2.0 $(INSTALLDIR)/curl-7.21.7/usr/lib/libcurl.so.4.2.0
 	$(STRIP) $(INSTALLDIR)/curl-7.21.7/usr/lib/libcurl.so.4.2.0
 	cd $(INSTALLDIR)/curl-7.21.7/usr/lib && ln -sf libcurl.so.4.2.0 libcurl.so && ln -sf libcurl.so.4.2.0 libcurl.so.4
-ifeq ($(or $(RTCONFIG_SPEEDTEST),$(RTCONFIG_LETSENCRYPT),$(RTAC85P),$(RTAC85U),$(RMAC2100)),y)
+ifeq ($(or $(RTCONFIG_SPEEDTEST),$(RTCONFIG_LETSENCRYPT),$(RTAC85P),$(RTAC85U),$(RMAC2100),$(RTE8820S)),y)
 	# for speedtest
 	install -D curl-7.21.7/src/.libs/curl $(INSTALLDIR)/curl-7.21.7/usr/sbin/curl
 	$(STRIP) $(INSTALLDIR)/curl-7.21.7/usr/sbin/curl
