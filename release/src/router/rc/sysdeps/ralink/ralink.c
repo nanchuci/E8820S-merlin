@@ -53,7 +53,7 @@
 char *wlc_nvname(char *keyword);
 //#endif
 
-#if defined(RTAC52U) || defined(RTAC51U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC51UP) || defined(RTAC53) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
+#if defined(RTAC52U) || defined(RTAC51U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTAC1200) || defined(RTCONFIG_MTK_REP) || defined(RTAC51UP) || defined(RTAC53) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S)
 #define VHT_SUPPORT /* 11AC */
 #endif
 
@@ -521,7 +521,7 @@ int getCountryRegion5G(const char *countryCode, int *warning, int IEEE80211H)
 			(!strcasecmp(countryCode, "BZ")) ||
 			(!strcasecmp(countryCode, "BO")) ||
 			(!strcasecmp(countryCode, "BN")) ||
-//			(!strcasecmp(countryCode, "CN")) ||
+			(!strcasecmp(countryCode, "CN")) ||
 			(!strcasecmp(countryCode, "ID")) ||
 			(!strcasecmp(countryCode, "IR")) ||
 #ifdef RTCONFIG_LOCALE2012
@@ -862,7 +862,7 @@ int gen_ralink_config(int band, int is_iNIC)
 #endif	/* CE_ADAPTIVITY */
 	if (str && strlen(str))
 	{
-#if defined(RTAC1200HP) || defined(RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
+#if defined(RTAC1200HP) || defined(RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTAC85P) || defined(RMAC2100)
 		if(nvram_match("JP_CS","1"))
 			fprintf(fp, "CountryCode=JP\n");
 		else
@@ -1664,7 +1664,7 @@ int gen_ralink_config(int band, int is_iNIC)
 	{
 		fprintf(fp, "GreenAP=%d\n", 1);
 	}
-#elif defined(RTN14U) || defined(RTAC52U) || defined(RTAC51U) || defined(RTAC51UP) || defined(RTAC53) || defined(RTN11P) || defined(RTN300) || defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100) defined(RTCONFIG_MTK_REP)
+#elif defined(RTN14U) || defined(RTAC52U) || defined(RTAC51U) || defined(RTAC51UP) || defined(RTAC53) || defined(RTN11P) || defined(RTN300) || defined(RTN54U) || defined(RTAC1200HP) || defined(RTN56UB1) || defined(RTAC54U) || defined(RTN56UB2) || defined(RTAC1200GA1)  || defined(RTAC1200GU) || defined(RTE8820S) || defined(RTCONFIG_MTK_REP)
 	/// MT7620 GreenAP will impact TSSI, force to disable GreenAP here..
 	//  MT7620 GreenAP cause bad site survey result on RTAC52 2G.
 	{
