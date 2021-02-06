@@ -1243,7 +1243,6 @@ void init_syspara(void)
 #if defined(RTAC1200) || defined(RTAC53)
 	nvram_set("et0macaddr", macaddr2);
 	nvram_set("et1macaddr", macaddr);
-#elif defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
 #else
 
 	//TODO: separate for different chipset solution
@@ -1255,34 +1254,24 @@ void init_syspara(void)
 		dbg("READ MAC address GMAC0: Out of scope\n");
 	else
 	{
-#if !defined(RTE8820S) && !defined(RTMIR4A) && !defined(RTMIR3G) && !defined(RTR2100)
 		if (buffer[0]==0xff)
 		{
 			if (ether_atoe(macaddr, ea))
 				FWrite(ea, OFFSET_MAC_GMAC0, 6);
 		}
-#else
-        ether_etoa(buffer, macaddr);
-        nvram_set("et0macaddr", macaddr);
-#endif
 	}
 
 	if (FRead(dst, OFFSET_MAC_GMAC2, bytes)<0)
 		dbg("READ MAC address GMAC2: Out of scope\n");
 	else
 	{
-#if !defined(RTE8820S) && !defined(RTMIR4A) && !defined(RTMIR3G) && !defined(RTR2100)
 		if (buffer[0]==0xff)
 		{
 			if (ether_atoe(macaddr2, ea))
 				FWrite(ea, OFFSET_MAC_GMAC2, 6);
 		}
-#else
-        ether_etoa(buffer, macaddr2);
-        nvram_set("et1macaddr", macaddr2);
-#endif
 	}
-
+#endif
 	{
 #ifdef RTCONFIG_ODMPID
 		char modelname[16];
@@ -1333,11 +1322,6 @@ void init_syspara(void)
 #if defined(RTAC51U) || defined(RTAC51UP) || defined(RTAC53) || defined(RTN11P) 
 	reg_spec_def = "CE";
 #else
-#if defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
-	if (!nvram_match("location_code", "US"))
-		reg_spec_def = "CE";
-	else
-#endif
 	reg_spec_def = "FCC";
 #endif
 	bytes = MAX_REGSPEC_LEN;
@@ -1564,25 +1548,7 @@ void init_syspara(void)
 	_dprintf("bootloader version: %s\n", nvram_safe_get("blver"));
 	_dprintf("firmware version: %s\n", nvram_safe_get("firmver"));
 
-
-#if defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
-	// set country from location_code
-	char *loc_code[] = {"DB", "EU", "RU", "US", "CN", 0};
-	char **curr_loc_code = loc_code;
-	for (; *curr_loc_code; *curr_loc_code++)
-		if (nvram_match("location_code", *curr_loc_code)) {
-			nvram_set("wl_country_code", *curr_loc_code);
-			nvram_set("wl0_country_code", *curr_loc_code);
-			nvram_set("wl1_country_code", *curr_loc_code);
-#ifdef RTCONFIG_RALINK_DFS
-			if (!strcmp(*curr_loc_code, "EU"))
-				nvram_set("wl1_IEEE80211H", "1");
-#endif
-			break;
-		}
-#endif
-
-#if 0
+#if !defined (RTCONFIG_WLMODULE_MT7615E_AP)
 	dst = txbf_para;
 	int count_0xff = 0;
 	if (FRead(dst, OFFSET_TXBF_PARA, 33) < 0)
@@ -1745,11 +1711,6 @@ void reinit_hwnat(int unit)
 #if defined(RTAC85U) || defined(RTAC85P) || defined(RTN800HP) || defined(RTACRH26) || defined(RMAC2100)
 	if(!is_wan_connect(prim_unit))
 		return;
-#endif
-
-#if defined(RTE8820S) || defined(RTMIR4A) || defined(RTMIR3G) || defined(RTR2100)
-	if (nvram_get_int("apps_analysis") + nvram_get_int("ctf_disable") + nvram_get_int("ctf_disable_force"))
-		act = 0;
 #endif
 
 	/* If QoS is enabled, disable hwnat. */
@@ -1925,6 +1886,9 @@ set_wan_tag(char *interface) {
 	case MODEL_RTAC85P:
 	case MODEL_RTACRH26:
     case MODEL_RTE8820S:
+#if defined(RMAC2100)
+	case MODEL_RMAC2100:
+#endif
 	case MODEL_RTN800HP:
 		ifconfig(interface, IFUP, 0, 0);
 		if(wan_vid) { /* config wan port */
