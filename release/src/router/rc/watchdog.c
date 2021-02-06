@@ -2413,17 +2413,11 @@ void led_on_off(void)
 	if (nvram_match("led_on_off", "1")) {
 		led_control(LED_POWER, LED_ON);
 		led_control(LED_WAN, LED_ON);
-		led_control(LED_SYS, LED_ON);
-		led_control(LED_2G_GPIO, LED_ON);
-		led_control(LED_5G_GPIO, LED_ON);
-		led_control(LED_ALL, LED_ON);	
+		led_control(LED_ALL, LED_ON);
 	}else{
 		led_control(LED_POWER, LED_OFF);
 		led_control(LED_WAN, LED_OFF);
-		led_control(LED_SYS, LED_OFF);
-		led_control(LED_2G_GPIO, LED_OFF);
-		led_control(LED_5G_GPIO, LED_OFF);
-		led_control(LED_ALL, LED_OFF);	
+		led_control(LED_ALL, LED_OFF);
 	}
 }
 #endif
