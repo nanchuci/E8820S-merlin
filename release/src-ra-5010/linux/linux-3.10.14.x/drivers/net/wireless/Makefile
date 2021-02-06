@@ -71,9 +71,9 @@ endif
 #obj-$(CONFIG_MT_AP_SUPPORT)       += mt_wifi_ap/
 #obj-$(CONFIG_CHIP_MT7615E)       += mt_wifi_ap_7615E_4421/
 #endif
-#ifneq ($(CONFIG_MT_STA_SUPPORT),)
-#obj-$(CONFIG_MT_STA_SUPPORT)      += mt_wifi_sta/
-#endif
+ifneq ($(CONFIG_MT_STA_SUPPORT),)
+obj-$(CONFIG_MT_STA_SUPPORT)      += mt_wifi_sta/
+endif
 ifneq ($(CONFIG_WIFI_PKT_FWD),)
 obj-y                         += wifi_forward/wifi_hook/
 endif
