@@ -210,6 +210,8 @@ define platformKernelConfig
 			echo "CONFIG_PCIE_PORT0=y" >>$(1); \
 			sed -i "/CONFIG_PCIE_PORT1/d" $(1); \
 			echo "CONFIG_PCIE_PORT1=y" >>$(1); \
+			sed -i "/CONFIG_RALINK_SPDIF/d" $(1); \
+			echo "CONFIG_RALINK_SPDIF=m" >>$(1); \
 			sed -i "/CONFIG_RCU_CPU_STALL_DETECTOR/d" $(1); \
 			echo "CONFIG_RCU_CPU_STALL_DETECTOR=y" >>$(1); \
 			sed -i "/CONFIG_CRYPTO_PCRYPT/d" $(1); \
@@ -443,7 +445,7 @@ define platformKernelConfig
 		sed -i "/CONFIG_RT_SECOND_CARD_EEPROM/d" $(1); \
 		echo "CONFIG_RT_SECOND_CARD_EEPROM=\"flash\"" >>$(1); \
 		sed -i "/CONFIG_MULTI_INF_SUPPORT/d" $(1); \
-		echo "# CONFIG_MULTI_INF_SUPPORT is not set" >>$(1); \
+		echo "CONFIG_MULTI_INF_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_WIFI_BASIC_FUNC/d" $(1); \
 		echo "CONFIG_WIFI_BASIC_FUNC=y" >>$(1); \
 		sed -i "/CONFIG_WSC_INCLUDED/d" $(1); \
@@ -457,7 +459,7 @@ define platformKernelConfig
 		sed -i "/CONFIG_DOT11_VHT_AC/d" $(1); \
 		echo "CONFIG_DOT11_VHT_AC=y" >>$(1); \
 		sed -i "/CONFIG_DOT11W_PMF_SUPPORT/d" $(1); \
-		echo "CONFIG_DOT11W_PMF_SUPPORT=y" >>$(1); \
+		echo "# CONFIG_DOT11W_PMF_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_TXBF_SUPPORT/d" $(1); \
 		echo "# CONFIG_TXBF_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_LLTD_SUPPORT/d" $(1); \
@@ -498,7 +500,7 @@ define platformKernelConfig
 		sed -i "/CONFIG_SINGLE_SKU_V2/d" $(1); \
 		echo "CONFIG_SINGLE_SKU_V2=y" >>$(1); \
 		sed -i "/CONFIG_ATE_SUPPORT/d" $(1); \
-		echo "# CONFIG_ATE_SUPPORT is not set" >>$(1); \
+		echo "CONFIG_ATE_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_RT2860V2_AP_32B_DESC/d" $(1); \
 		echo "# CONFIG_RT2860V2_AP_32B_DESC is not set " >>$(1); \
 		sed -i "/CONFIG_HOTSPOT/d" $(1); \
@@ -538,7 +540,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RLT_MAC/d" $(1); \
 			echo "#CONFIG_RLT_MAC is not set" >>$(1); \
 		fi; \
-		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] || [ "$(RTE8820S)" = "y" ] || [ "$(RTMIR4A)" = "y" ] || [ "$(RTRM2100)" = "y" ] || [ "$(RTR2100)" = "y" ]; then \
+		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] ; then \
 			sed -i "/CONFIG_RA_HW_NAT_IPV6/d" $(1); \
 			echo "CONFIG_RA_HW_NAT_IPV6=y" >>$(1); \
 			sed -i "/CONFIG_RAETH_8023AZ_EEE/d" $(1); \
@@ -571,16 +573,12 @@ define platformKernelConfig
 		echo "CONFIG_WDS_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_MBSS_SUPPORT/d" $(1); \
 		echo "CONFIG_MBSS_SUPPORT=y" >>$(1); \
-		sed -i "/CONFIG_NEW_MBSSID_MODE/d" $(1); \
-		echo "CONFIG_NEW_MBSSID_MODE=y" >>$(1); \
-		sed -i "/CONFIG_ENHANCE_NEW_MBSSID_MODE/d" $(1); \
-		echo "CONFIG_ENHANCE_NEW_MBSSID_MODE=y" >>$(1); \
 		sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 		echo "# CONFIG_APCLI_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_NINTENDO_AP/d" $(1); \
 		echo "# CONFIG_NINTENDO_AP is not set" >>$(1); \
 		sed -i "/CONFIG_COC_SUPPORT/d" $(1); \
-		echo "#CONFIG_COC_SUPPORT is not set" >>$(1); \
+		echo "CONFIG_COC_SUPPORT=y " >>$(1); \
 		sed -i "/CONFIG_DELAYED_TCP_ACK_SUPPORT/d" $(1); \
 		echo "# CONFIG_DELAYED_TCP_ACK_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_RALINK_RT28XX/d" $(1); \
@@ -631,7 +629,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 			echo "CONFIG_APCLI_SUPPORT=y" >>$(1); \
 			sed -i "/CONFIG_MAC_REPEATER_SUPPORT/d" $(1); \
-			echo "CONFIG_MAC_REPEATER_SUPPORT=y" >>$(1); \
+			echo "# CONFIG_MAC_REPEATER_SUPPORT is not set" >>$(1); \
 			sed -i "/CONFIG_APCLI_CERT_SUPPORT/d" $(1); \
 			echo "# CONFIG_APCLI_CERT_SUPPORT is not set" >>$(1); \
 		fi; \
@@ -708,7 +706,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RT2860V2_AP_CARRIER/d" $(1); \
 			echo "CONFIG_RT2860V2_AP_CARRIER=y" >>$(1); \
 	fi; \
-	if [ "$(RTAC85P)" = "y" ] || [ "$(RMAC2100)" = "y" ] ; then \
+	if [ "$(RTAC85P)" = "y" ] || [ "$(RMAC2100)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
 			sed -i "/CONFIG_NF_CT_NETLINK/d" $(1); \
 			echo "CONFIG_NF_CT_NETLINK=m" >>$(1); \
 			sed -i "/CONFIG_NF_CT_NETLINK_TIMEOUT/d" $(1); \
