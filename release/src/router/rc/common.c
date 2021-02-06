@@ -1583,9 +1583,6 @@ void stop_if_misc(void)
 
 int mssid_mac_validate(const char *macaddr)
 {
-#if defined(RTE8820S) || defined(RTMIR4A) || defined(RTRM2100) || defined(RTR2100)
-	return 1;
-#endif
 	unsigned char mac_binary[6];
 	unsigned long long macvalue;
 	char macbuf[13];

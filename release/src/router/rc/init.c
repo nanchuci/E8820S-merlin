@@ -1512,6 +1512,7 @@ misc_defaults(int restore_defaults)
 		case MODEL_RTAC51U:
 		case MODEL_RTN65U:
 		case MODEL_RTAC85U:
+		case MODEL_RTE8820S:
 		case MODEL_RTAC85P:
 		case MODEL_RTACRH26:
 #if defined(RMAC2100)
@@ -3851,6 +3852,8 @@ int init_nvram(void)
 		nvram_set_int("led_sys_gpio", 16|GPIO_ACTIVE_LOW);
 		nvram_set_int("led_pwr_gpio",  3|GPIO_ACTIVE_LOW);
 		nvram_set_int("led_wps_gpio",  7|GPIO_ACTIVE_LOW);
+		nvram_set_int("led_2g_gpio",  |GPIO_ACTIVE_LOW);
+		nvram_set_int("led_5g_gpio",  |GPIO_ACTIVE_LOW);
 //		nvram_set_int("led_all_gpio", 10|GPIO_ACTIVE_LOW);
 
 		eval("rtkswitch", "11");
