@@ -7565,7 +7565,7 @@ $as_echo "$USE_NLS" >&6; }
 
 
 
-      GETTEXT_MACRO_VERSION=0.19
+      GETTEXT_MACRO_VERSION=0.18
 
 
 
