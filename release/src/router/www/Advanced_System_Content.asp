@@ -1703,7 +1703,7 @@ function pullPingTargetList(obj){
 					<td>
 						<input type="radio" name="btn_ez_radiotoggle" id="turn_WPS" class="input" style="display:none;" value="0"><label for="turn_WPS"><#WPS_btn_actWPS#></label>
 						<input type="radio" name="btn_ez_radiotoggle" id="turn_WiFi" class="input" style="display:none;" value="1" <% nvram_match_x("", "btn_ez_radiotoggle", "1", "checked"); %>><label for="turn_WiFi" id="turn_WiFi_str"><#WPS_btn_toggle#></label>
-						<input type="radio" name="btn_ez_radiotoggle" id="turn_LED" class="input" style="display:none;" value="0" <% nvram_match_x("", "btn_ez_mode", "1", "checked"); %>><label for="turn_LED" id="turn_LED_str">Turn LED On/Off</label>
+						<input type="radio" name="btn_ez_radiotoggle" id="turn_LED" class="input" style="display:none;" value="0" <% nvram_match_x("", "btn_ez_mode", "1", "checked"); %>><label for="turn_LED" id="turn_LED_str"><#LED_switch#></label>
 					</td>
 				</tr>
 				<tr id="disabled_led_tr" style="display:none">
@@ -1735,6 +1735,13 @@ function pullPingTargetList(obj){
 					<td>
 						<input type="radio" value="1" name="reboot_schedule_enable_x" onClick="hide_reboot_option(1);" <% nvram_match_x("LANHostConfig","reboot_schedule_enable", "1", "checked"); %>><#checkbox_Yes#>
 						<input type="radio" value="0" name="reboot_schedule_enable_x" onClick="hide_reboot_option(0);" <% nvram_match_x("LANHostConfig","reboot_schedule_enable", "0", "checked"); %>><#checkbox_No#>
+					</td>
+				</tr>
+				<tr id="led_on_off">
+					<th align="right"><a class="hintstyle" href="javascript:void(0);" onClick="openHint(11,6);"><#Enable_led_on_off#></a></th>
+					<td>
+						<input type="radio" name="led_on_off" class="input" value="1" <% nvram_match_x("","led_on_off","1", "checked"); %> ><#checkbox_Yes#>
+						<input type="radio" name="led_on_off" class="input" value="0" <% nvram_match_x("","led_on_off","0", "checked"); %> ><#checkbox_No#>
 					</td>
 				</tr>
 				<tr id="reboot_schedule_date_tr">
