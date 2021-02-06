@@ -164,8 +164,8 @@ enum {
 	WAN_PORT=4,
 	LAN1_PORT=0,
 	LAN2_PORT=1,
-	LAN3_PORT=2, //unused
-	LAN4_PORT=3, //unused
+	LAN3_PORT=2,
+	LAN4_PORT=3,
 	P5_PORT=5,
 	CPU_PORT=6,
 	P7_PORT=7,
