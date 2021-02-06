@@ -49,9 +49,6 @@ static const struct model_s model_list[] = {
 	{ "RT-N10P_V3", MODEL_RTN11P_B1},
 	{ "RP-AC87", MODEL_RPAC87},	
 	{ "RT-E8820S", MODEL_RTE8820S},
-	{ "RT-MIR4A", MODEL_RTMIR4A},
-	{ "RT-MIR3G", MODEL_RTMIR3G},
-	{ "RT-R2100", MODEL_RTR2100},
 	{ "RT-AC85U", MODEL_RTAC85U},
 #if defined(RMAC2100)
 	{ "RM-AC2100", MODEL_RMAC2100},
