@@ -24,6 +24,10 @@
 #include <lp5523led.h>
 #endif
 
+#if defined(RTCONFIG_TR069)
+#include <rc.h>
+#endif
+
 #if defined(K3)
 #include <k3.h>
 #elif defined(R7900P) || defined(R8000P)
@@ -896,7 +900,7 @@ static const applets_t applets[] = {
 #endif
 #endif
 #endif
-#if defined(RTCONFIG_TR069) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
+#if defined(RTCONFIG_TR069) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 	{ "dhcpc_lease",		dnsmasq_script_main		},
 #endif
 #ifdef RTCONFIG_NEW_USER_LOW_RSSI
