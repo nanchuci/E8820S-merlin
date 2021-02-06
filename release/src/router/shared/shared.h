@@ -680,6 +680,7 @@ enum {
 	MODEL_RTN11P_B1,
 	MODEL_RPAC87,
 	MODEL_RTAC85U,
+	MODEL_RTE8820S,
 #if defined(RMAC2100)
 	MODEL_RMAC2100,
 #endif
@@ -700,11 +701,6 @@ enum {
 	MODEL_GTAX6000N,
 	MODEL_GTAX6000S,
 };
-
-#define MODEL_RTE8820S MODEL_RTAC85U
-#define MODEL_RTMIR4A MODEL_RTAC85U
-#define MODEL_RTMIR3G MODEL_RTAC85U
-#define MODEL_RTR2100 MODEL_RTAC85U
 
 /* NOTE: Do not insert new entries in the middle of this enum,
  * always add them to the end! */

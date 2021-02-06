@@ -198,15 +198,6 @@ int get_fwver(char *buildno, char *extendno) {
  * result is cached for safe multiple use */
 int get_model(void)
 {
-#if defined(RTE8820S)
-	return MODEL_RTE8820S;
-#elif defined(RTMIR4A)
-	return MODEL_RTMIR4A;
-#elif defined(RTMIR3G)
-	return MODEL_RTMIR3G;
-#elif defined(RTR2100)
-	return MODEL_RTR2100;
-#endif
 	static int model = MODEL_UNKNOWN;
 	char *pid;
 	const struct model_s *p;
