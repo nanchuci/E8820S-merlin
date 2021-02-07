@@ -896,7 +896,7 @@ static const applets_t applets[] = {
 #endif
 #endif
 #endif
-#if defined(RTCONFIG_TR069) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
+#if defined(RTCONFIG_TR069) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
 	{ "dhcpc_lease",		dnsmasq_script_main		},
 #endif
 #ifdef RTCONFIG_NEW_USER_LOW_RSSI
