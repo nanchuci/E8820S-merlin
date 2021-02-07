@@ -40,7 +40,7 @@ enum {
 };
 extern void softcenter_eval(int sig);
 #endif
-#if defined(RMAC2100) ||  defined(RTE8820S)
+#if defined(RMAC2100) || defined(RTE8820S)
 extern void patch_Factory(void);
 #endif
 #endif
