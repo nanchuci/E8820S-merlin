@@ -459,9 +459,9 @@ define platformKernelConfig
 		sed -i "/CONFIG_DOT11_VHT_AC/d" $(1); \
 		echo "CONFIG_DOT11_VHT_AC=y" >>$(1); \
 		sed -i "/CONFIG_DOT11W_PMF_SUPPORT/d" $(1); \
-		echo "# CONFIG_DOT11W_PMF_SUPPORT is not set" >>$(1); \
+		echo "CONFIG_DOT11W_PMF_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_TXBF_SUPPORT/d" $(1); \
-		echo "# CONFIG_TXBF_SUPPORT is not set" >>$(1); \
+		echo "CONFIG_TXBF_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_LLTD_SUPPORT/d" $(1); \
 		echo "CONFIG_LLTD_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_QOS_DLS_SUPPORT/d" $(1); \
@@ -497,10 +497,8 @@ define platformKernelConfig
 		echo "CONFIG_RTMP_FLASH_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_LED_CONTROL_SUPPORT/d" $(1); \
 		echo "CONFIG_LED_CONTROL_SUPPORT=y" >>$(1); \
-		sed -i "/CONFIG_SINGLE_SKU_V2/d" $(1); \
-		echo "CONFIG_SINGLE_SKU_V2=y" >>$(1); \
 		sed -i "/CONFIG_ATE_SUPPORT/d" $(1); \
-		echo "CONFIG_ATE_SUPPORT=y" >>$(1); \
+		echo "# CONFIG_ATE_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_RT2860V2_AP_32B_DESC/d" $(1); \
 		echo "# CONFIG_RT2860V2_AP_32B_DESC is not set " >>$(1); \
 		sed -i "/CONFIG_HOTSPOT/d" $(1); \
@@ -573,12 +571,16 @@ define platformKernelConfig
 		echo "CONFIG_WDS_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_MBSS_SUPPORT/d" $(1); \
 		echo "CONFIG_MBSS_SUPPORT=y" >>$(1); \
+		sed -i "/CONFIG_NEW_MBSSID_MODE/d" $(1); \
+		echo "CONFIG_NEW_MBSSID_MODE=y" >>$(1); \
+		sed -i "/CONFIG_ENHANCE_NEW_MBSSID_MODE/d" $(1); \
+		echo "CONFIG_ENHANCE_NEW_MBSSID_MODE=y" >>$(1); \
 		sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 		echo "# CONFIG_APCLI_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_NINTENDO_AP/d" $(1); \
 		echo "# CONFIG_NINTENDO_AP is not set" >>$(1); \
 		sed -i "/CONFIG_COC_SUPPORT/d" $(1); \
-		echo "CONFIG_COC_SUPPORT=y " >>$(1); \
+		echo "#CONFIG_COC_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_DELAYED_TCP_ACK_SUPPORT/d" $(1); \
 		echo "# CONFIG_DELAYED_TCP_ACK_SUPPORT is not set" >>$(1); \
 		sed -i "/CONFIG_RALINK_RT28XX/d" $(1); \
@@ -629,7 +631,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_APCLI_SUPPORT/d" $(1); \
 			echo "CONFIG_APCLI_SUPPORT=y" >>$(1); \
 			sed -i "/CONFIG_MAC_REPEATER_SUPPORT/d" $(1); \
-			echo "# CONFIG_MAC_REPEATER_SUPPORT is not set" >>$(1); \
+			echo "CONFIG_MAC_REPEATER_SUPPORT=y" >>$(1); \
 			sed -i "/CONFIG_APCLI_CERT_SUPPORT/d" $(1); \
 			echo "# CONFIG_APCLI_CERT_SUPPORT is not set" >>$(1); \
 		fi; \
