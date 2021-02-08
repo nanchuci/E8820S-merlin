@@ -1680,7 +1680,7 @@ void reload_dnsmasq(void)
 	/* notify dnsmasq */
 	kill_pidfile_s("/var/run/dnsmasq.pid", SIGHUP);
 }
-#if defined(RTCONFIG_TR069) ||  defined(RTCONFIG_AMAS) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100)
+#if defined(RTCONFIG_TR069) ||  defined(RTCONFIG_AMAS) || defined(RTAC3200) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 int dnsmasq_script_main(int argc, char **argv)
 {
 #if defined(RTCONFIG_SOFTCENTER)
@@ -9516,7 +9516,7 @@ again:
 					_dprintf(" Write FW to the 2nd partition.\n");
 					if (nvram_contains_word("rc_support", "nandflash"))	/* RT-AC56S,U/RT-AC68U/RT-N16UHP */
 						eval("mtd-write2", upgrade_file, "linux2");
-#if !defined(RMAC2100) || defined(RTE8820S)
+#if !defined(RMAC2100)
 					else
 						eval("mtd-write", "-i", upgrade_file, "-d", "linux2");
 #endif
