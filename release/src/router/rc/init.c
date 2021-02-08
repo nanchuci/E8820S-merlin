@@ -9322,14 +9322,13 @@ int init_nvram2(void)
 	macp = get_2g_hwaddr();
 	ether_atoe(macp, mac_binary);
 
-#if defined(RTAC85U) || defined(RTAC85P) || defined(RTACRH26) || defined(RTE8820S)
+#if defined(RTAC85U) || defined(RTAC85P) || defined(RTACRH26)
 	int model = get_model();
 	switch(model)
 	{
 	case MODEL_RTAC85U:
 	case MODEL_RTAC85P:
 	case MODEL_RTACRH26:
-	case MODEL_RTE8820S:
 #ifdef RTCONFIG_USB_SWAP
 		if(nvram_get_int("apps_swap_threshold") == 0) {
 			nvram_set("apps_swap_enable", "1");
@@ -10216,7 +10215,7 @@ static void sysinit(void)
 	// avoid the process like fsck to devour the memory.
 	// ex: when DUT ran fscking, restarting wireless would let DUT crash.
 
-	if ((model == MODEL_RTAC1200) ||(model == MODEL_RTAC1200GA1) ||(model == MODEL_RTAC1200GU))
+	if ((model == MODEL_RTAC1200) ||(model == MODEL_RTAC1200GA1) ||(model == MODEL_RTAC1200GU) ||(model == MODEL_RTE8820S))
 	{
 		f_write_string("/proc/sys/vm/min_free_kbytes", "8192", 0, 0);
 		min_free_kbytes_check = 1;
@@ -10750,7 +10749,7 @@ int init_main(int argc, char *argv[])
 #ifdef RTCONFIG_USB
 				remove_storage_main(1);
 				if (!g_reboot) {
-#if !(defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU))
+#if !(defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU) || defined(RTE8820S))
 #ifndef RTCONFIG_ERPTEST
 					stop_usb();
 #else
