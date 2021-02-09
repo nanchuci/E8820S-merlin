@@ -19,7 +19,7 @@ fi
 cd /opt/asus/release/src/router/wget
 sudo autoreconf -vfi
 cd /opt/asus/release/src/router/sdparm-1.02
-$ bash ./configure
+sudo chmod +x ./configure
 
 cd /opt/asus/release/src-ra-5010
 export PATH=/opt/brcm/hndtools-mipsel-linux/bin:$PATH
