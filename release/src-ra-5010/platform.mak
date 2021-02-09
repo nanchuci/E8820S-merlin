@@ -386,6 +386,8 @@ define platformKernelConfig
 	if [ "$(FIRST_IF)" = "MT7603E" ] ; then \
 		sed -i "/CONFIG_WIFI_MT7603E/d" $(1); \
 		echo "CONFIG_WIFI_MT7603E=m" >>$(1); \
+		sed -i "/CONFIG_MT7603E_LED_CONTROL_SUPPORT/d" $(1); \
+		echo "CONFIG_MT7603E_LED_CONTROL_SUPPORT=y" >>$(1); \
 		sed -i "/CONFIG_UAPSD/d" $(1); \
 		echo "CONFIG_UAPSD=y" >>$(1); \
 		sed -i "/CONFIG_MT_MAC/d" $(1); \
@@ -525,7 +527,7 @@ define platformKernelConfig
 				sed -i "/CONFIG_FIRST_CARD_EXTERNAL_LNA/d" $(1); \
 				echo "# CONFIG_FIRST_CARD_EXTERNAL_LNA is not set " >>$(1); \
 		fi; \
-		if [ "$(RTAC1200HP)" = "y" ] ; then \
+		if [ "$(RTAC1200HP)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_PA/d" $(1); \
 			echo "CONFIG_SECOND_CARD_EXTERNAL_PA=y" >>$(1); \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_LNA/d" $(1); \
