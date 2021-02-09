@@ -10215,7 +10215,7 @@ static void sysinit(void)
 	// avoid the process like fsck to devour the memory.
 	// ex: when DUT ran fscking, restarting wireless would let DUT crash.
 
-	if ((model == MODEL_RTAC1200) ||(model == MODEL_RTAC1200GA1) ||(model == MODEL_RTAC1200GU) ||(model == MODEL_RTE8820S))
+	if ((model == MODEL_RTAC1200) ||(model == MODEL_RTAC1200GA1) ||(model == MODEL_RTAC1200GU))
 	{
 		f_write_string("/proc/sys/vm/min_free_kbytes", "8192", 0, 0);
 		min_free_kbytes_check = 1;
@@ -10749,7 +10749,7 @@ int init_main(int argc, char *argv[])
 #ifdef RTCONFIG_USB
 				remove_storage_main(1);
 				if (!g_reboot) {
-#if !(defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU) || defined(RTE8820S))
+#if !(defined(RTN56UB1) || defined(RTN56UB2) || defined(RTAC1200GA1) || defined(RTAC1200GU))
 #ifndef RTCONFIG_ERPTEST
 					stop_usb();
 #else
