@@ -862,7 +862,7 @@ int gen_ralink_config(int band, int is_iNIC)
 #endif	/* CE_ADAPTIVITY */
 	if (str && strlen(str))
 	{
-#if defined(RTAC1200HP) || defined(RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTAC85P) || defined(RMAC2100)
+#if defined(RTAC1200HP) || defined(RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTAC85P) || defined(RMAC2100) || defined(RTE8820S)
 		if(nvram_match("JP_CS","1"))
 			fprintf(fp, "CountryCode=JP\n");
 		else
@@ -2670,7 +2670,7 @@ int gen_ralink_config(int band, int is_iNIC)
 		str = nvram_safe_get(strcat_r(prefix, "txbf", tmp));
 		if ((atoi(str) > 0) && nvram_match(strcat_r(prefix, "txbf_en", tmp), "1"))
 		{
-#if defined (RTCONFIG_WLMODULE_MT7615E_AP)
+#if defined (RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTCONFIG_WLMODULE_MT7612E_AP)
 			fprintf(fp, "BFBACKOFFenable=%d\n", 1);
 			fprintf(fp, "ITxBfEn=%d\n", 0);
 			fprintf(fp, "ETxBfIncapable=%d\n", 0);
@@ -2704,7 +2704,7 @@ int gen_ralink_config(int band, int is_iNIC)
 #else
 			fprintf(fp, "ETxBfEnCond=%d\n", 0);
 #endif
-#if defined (RTCONFIG_WLMODULE_MT7615E_AP)
+#if defined (RTCONFIG_WLMODULE_MT7615E_AP) || defined(RTCONFIG_WLMODULE_MT7612E_AP)
 			fprintf(fp, "ETxBfIncapable=%d\n", 1);
 #endif
 		}
