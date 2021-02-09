@@ -952,6 +952,11 @@ void init_wl(void)
 		modprobe("mt_wifi_7628");
 #endif
 
+#if defined (RTCONFIG_WLMODULE_MT7612E_AP)
+	if (!module_loaded("mt76x2_ap"))
+		modprobe("mt76x2_ap");
+#endif
+
 #if defined (RTCONFIG_WLMODULE_RLT_WIFI)
 	if (!module_loaded("rlt_wifi"))
 	{   
@@ -994,6 +999,10 @@ void fini_wl(void)
 #if defined (RTCONFIG_WLMODULE_MT7628_AP)
 	if (module_loaded("mt_wifi_7628"))
 		modprobe_r("mt_wifi_7628");
+#endif
+#if defined (RTCONFIG_WLMODULE_MT7612E_AP)
+	if (module_loaded("mt76x2_ap"))
+		modprobe_r("mt76x2_ap");
 #endif
 #if defined (RTCONFIG_WLMODULE_RLT_WIFI)
 	if (module_loaded("rlt_wifi"))
