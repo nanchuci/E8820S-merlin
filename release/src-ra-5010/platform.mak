@@ -527,7 +527,7 @@ define platformKernelConfig
 				sed -i "/CONFIG_FIRST_CARD_EXTERNAL_LNA/d" $(1); \
 				echo "# CONFIG_FIRST_CARD_EXTERNAL_LNA is not set " >>$(1); \
 		fi; \
-		if [ "$(RTAC1200HP)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
+		if [ "$(RTAC1200HP)" = "y" ] ; then \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_PA/d" $(1); \
 			echo "CONFIG_SECOND_CARD_EXTERNAL_PA=y" >>$(1); \
 			sed -i "/CONFIG_SECOND_CARD_EXTERNAL_LNA/d" $(1); \
@@ -542,7 +542,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RLT_MAC/d" $(1); \
 			echo "#CONFIG_RLT_MAC is not set" >>$(1); \
 		fi; \
-		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] || [ "$(RTE8820S)" = "y" ] ; then \
+		if [ "$(RTN56UB1)" = "y" ] ||  [ "$(RTN56UB2)" = "y" ] ; then \
 			sed -i "/CONFIG_RA_HW_NAT_IPV6/d" $(1); \
 			echo "CONFIG_RA_HW_NAT_IPV6=y" >>$(1); \
 			sed -i "/CONFIG_RAETH_8023AZ_EEE/d" $(1); \
@@ -708,7 +708,7 @@ define platformKernelConfig
 			sed -i "/CONFIG_RT2860V2_AP_CARRIER/d" $(1); \
 			echo "CONFIG_RT2860V2_AP_CARRIER=y" >>$(1); \
 	fi; \
-	if [ "$(RTAC85P)" = "y" ] || [ "$(RMAC2100)" = "y" ]; then \
+	if [ "$(RTAC85P)" = "y" ] || [ "$(RMAC2100)" = "y" ] || [ "$(RTE8820S)" = "y" ]; then \
 			sed -i "/CONFIG_NF_CT_NETLINK/d" $(1); \
 			echo "CONFIG_NF_CT_NETLINK=m" >>$(1); \
 			sed -i "/CONFIG_NF_CT_NETLINK_TIMEOUT/d" $(1); \
