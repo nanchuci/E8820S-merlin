@@ -2005,7 +2005,7 @@ void setup_smp(void)
 #endif
 
 #if 0
-#if defined(RTAC1200GU) || defined(RTAC1200GA1) || defined(RPAC87)
+#if defined(RTAC1200GU) || defined(RTAC1200GA1) || defined(RPAC87) || defined(RTE8820S)
 	f_write_string("/proc/irq/3/smp_affinity", "2", 0, 0);  //GMAC
 	f_write_string("/proc/irq/4/smp_affinity", "4", 0, 0);  //PCIe0
 	f_write_string("/proc/irq/24/smp_affinity", "8", 0, 0); //PCIe1
