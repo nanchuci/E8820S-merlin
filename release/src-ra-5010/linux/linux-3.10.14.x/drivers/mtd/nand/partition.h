@@ -11,7 +11,7 @@
 extern unsigned int  CFG_BLOCKSIZE;
 #if defined(CONFIG_DUAL_TRX)	/* ASUS_EXT */
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
-#define LARGE_MTD_BOOT_PART_SIZE	(0x100000)
+#define LARGE_MTD_BOOT_PART_SIZE	(0x80000)
 #define LARGE_MTD_CONFIG_PART_SIZE	(0x40000)
 #define LARGE_MTD_FACTORY_PART_SIZE	(0x40000)
 #define TRX_FIRMWARE_SIZE		(34 * 1024 * 1024) 	//50 MB
@@ -83,7 +83,7 @@ static struct mtd_partition g_pasStatic_Partition[] = {
                 name:           "nvram",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
                 size:           0x40000,
-                offset:         0x140000,
+                offset:         0x7800000,
 #else
                 size:           MTD_CONFIG_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND
@@ -102,7 +102,7 @@ static struct mtd_partition g_pasStatic_Partition[] = {
                 name:           "Factory2",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
                 size:           0x40000,
-                offset:         0x100000,
+                offset:         0x7840000,
 #else
                 size:           MTD_FACTORY_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND
@@ -131,7 +131,7 @@ static struct mtd_partition g_pasStatic_Partition[] = {
         }, {
                 name:           "linux",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
-                size:           0x2800000,
+                size:           0x400000,
                 offset:         0x200000,
 #else
                 size:           MTD_KERN_PART_SIZE,
@@ -140,8 +140,8 @@ static struct mtd_partition g_pasStatic_Partition[] = {
         }, {
                 name:           "RootFS",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
-                size:           0x2600000,
-                offset:         0x400000,
+                size:           0x1E00000,
+                offset:         0xA00000,
 #else
                 size:           MTD_ROOTFS_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
@@ -150,8 +150,8 @@ static struct mtd_partition g_pasStatic_Partition[] = {
         }, {
                 name:           "linux2",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
-                size:           0x2800000,
-                offset:         0x200000,
+                size:           0x400000,
+                offset:         0x600000,
 #else
                 size:           MTD_KERN_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
@@ -159,8 +159,8 @@ static struct mtd_partition g_pasStatic_Partition[] = {
         }, {
                 name:           "RootFS2",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
-                size:           0x2600000,
-                offset:         0x400000,
+                size:           0x1E00000,
+                offset:         0x2800000,
 #else
                 size:           MTD_ROOTFS_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
@@ -182,8 +182,8 @@ static struct mtd_partition g_pasStatic_Partition[] = {
         },{
                 name:           "jffs2",
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
-                size:           0x5500000,
-                offset:         0x2a00000,
+                size:           0x3980000,
+                offset:         0x4600000,
 #else
                 size:           MTD_JFFS2_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
@@ -196,8 +196,8 @@ static struct mtd_partition g_pasStatic_Partition[] = {
 #if defined(CONFIG_MODEL_RTE8820S) || defined(CONFIG_MODEL_RMAC2100)
         , {
                 name:           "RootFS-default",
-                size:           0x2600000,
-                offset:         0x400000,
+                size:           0x1E00000,
+                offset:         0,
 		}
 #endif
 
