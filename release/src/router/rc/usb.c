@@ -243,7 +243,7 @@ void add_usb_host_module(void)
 	modprobe(USBCORE_MOD);
 
 #if defined(RTCONFIG_USB_XHCI)
-#if defined(RTN65U) || defined(RTCONFIG_QCA) || defined(RTAC85U) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100)
+#if defined(RTN65U) || defined(RTCONFIG_QCA) || defined(RTAC85U) || defined(RTAC85P) || defined(RTACRH26) || defined(RMAC2100) || defined(RTE8820S)
 	if (nvram_get_int("usb_usb3") == 1)
 		u3_param = "u3intf=1";
 #if !defined(RTCONFIG_SOC_IPQ40XX)

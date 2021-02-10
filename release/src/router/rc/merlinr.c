@@ -164,7 +164,7 @@ void merlinr_init_done()
 	nvram_set("ping_target","www.taobao.com");
 #endif
 	nvram_commit();
-#if defined(RMAC2100) || defined(RTE8820S)
+#if defined(RMAC2100)
 	patch_Factory();
 #endif
 }
