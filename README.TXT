@@ -1,4 +1,4 @@
-# add supprot zte_e8820s by nanchuci
+# add support zte_e8820s by nanchuci
 
 asus official firmware has a bug, you always get an error:illegal image when you upload firmware or anything,i think asus confuses ac85p and ac85u, webui too
 
